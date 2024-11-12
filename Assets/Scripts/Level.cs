@@ -122,7 +122,6 @@ public class Level: MonoBehaviour
 
     public void AddTower(float x, float z)
     {
-        
         int w = (int)((x - bounds_min_x) / block_size);
         int l = (int)((z - bounds_min_z) / block_size);
         grid[w, l] = Tiles.Tower;

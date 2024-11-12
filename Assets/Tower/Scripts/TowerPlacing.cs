@@ -47,5 +47,10 @@ public class TowerPlacing : MonoBehaviour
             lastpos = temp.transform.position;
             Destroy(gameObject);
         }
+        if (Input.GetMouseButtonDown(1))
+        {
+            Globals.currentlyPlacing = null;
+            Destroy(gameObject);
+        }
     }
 }
