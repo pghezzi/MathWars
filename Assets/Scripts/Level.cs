@@ -11,6 +11,8 @@ using Newtonsoft.Json; // This needs to be installed from com.unity.nuget.newton
 using System.Data;
 using UnityEditor.Il2Cpp; 
 
+
+
 public enum Tiles
 {
     // I changed these enums incremented all by 1
@@ -39,48 +41,69 @@ public class Level: MonoBehaviour
     int bounds_size_z;
     int block_size;
 
+
     int width;
     int length;
-    int storey_height = 2;
-    Tiles[,] grid;
+    int storey_height   = 2;
     private Bounds bounds;
+    public Tiles[,] grid;
 
-    // Start is called before the first frame update
+    //  Start is called before the first frame update
     void Start()
     {
-        // move to globals or some sort of file storage
-        bounds_min_x = 0;
-        bounds_min_z = 0;
-        bounds_max_x = 200;
-        bounds_max_z = 100;
-        block_size = 10;
-        bounds_size_x = bounds_max_x - bounds_min_x;
-        bounds_size_z = bounds_max_z - bounds_min_z;
-        width = bounds_size_x / block_size;
-        length = bounds_size_z / block_size;
-        grid = new Tiles[width, length]; 
+        //  move to globals or some sort of file storage
+        bounds_min_x    = 0;
+        bounds_min_z    = 0;
+        block_size      = 10;
+
+        //  file loc setup
         string project_directoy = Directory.GetCurrentDirectory() + "/Assets/Levels/";
         string level_name = "level1.json";
         string file_path = project_directoy + level_name;
         
+        //  debug for testing, comment out in final
         Debug.Log(file_path);
         
-        //randgrid is for testing ONLY
-        // randGrid();
+        //  randgrid is for testing ONLY
+        //  randGrid(10, 20);
+        //  the function should have to deal with creating grid, will make need less globals 
         loadGridFromFile(file_path);
+        width           = grid.GetLength(0);
+        length          = grid.GetLength(1);
+        bounds_size_x   = width  * block_size;
+        bounds_size_z   = length * block_size;
+        bounds_max_x    = bounds_size_x + bounds_min_x;
+        bounds_max_z    = bounds_size_z + bounds_min_z;
         drawgrid();
     }
 
-    void randGrid()
+    //
+    // Summary:
+    //     Randomly generates a grid using random values from enum Level 
+    //
+    // Parameters:
+    //   rows:
+    //     number of rows for grid
+    //   cols:
+    //     number of cols for grid
+    //
+    // Returns:
+    //     Does not return anything but has side effect of setting values of grid
+
+    void randGrid(int rows, int cols)
     {
         if (grid == null)
         {
-            grid = new Tiles[width, length];
+            grid = new Tiles[rows, cols];
         }
         Tiles[] gen = new Tiles[] { Tiles.Unplacable, Tiles.Empty, Tiles.Path };
-        for (int i = 0; i < width; i++)
-            for (int j = 0; j < length; j++)
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
                 grid[i, j] = gen[UnityEngine.Random.Range(0, 3)];
+            }
+        }
     }
 
     //
@@ -113,6 +136,10 @@ public class Level: MonoBehaviour
             // transformations are used below to get the map rendered properly
             int rows = levelData.grid.GetLength(0);
             int cols = levelData.grid.GetLength(1);
+            if (grid == null)
+            {
+                grid = new Tiles[cols, rows];
+            }
             for (int r = 0; r < rows; r++)
             {
                 for (int c = 0; c < cols; c++)
@@ -132,6 +159,16 @@ public class Level: MonoBehaviour
     }
 
 
+    //
+    // Summary:
+    //     Uses grid variable to generate the level
+    //
+    // Parameters:
+    //   None
+    //
+    // Returns:
+    //     Does not return anything but has side effect of setting values of grid
+
     void drawgrid()
     {
         int w = 0;
@@ -145,6 +182,7 @@ public class Level: MonoBehaviour
                 float y = bounds.min[1];
                 if (grid[w, l] == Tiles.Empty)
                 {
+                    //placeholder object, should use prefabs for final
                     GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     cube.name = "EMPTY";
                     cube.transform.localScale = new Vector3(block_size, storey_height, block_size);
@@ -153,6 +191,7 @@ public class Level: MonoBehaviour
                 }
                 else if (grid[w, l] == Tiles.Path)
                 {
+                    //placeholder object, should use prefabs for final
                     GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     cube.name = "PATH";
                     cube.transform.localScale = new Vector3(block_size, storey_height, block_size);
@@ -161,6 +200,7 @@ public class Level: MonoBehaviour
                 }
                 else if (grid[w, l] == Tiles.Unplacable)
                 {
+                    //placeholder object, should use prefabs for final
                     GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     cube.name = "UNPLACABLE";
                     cube.transform.localScale = new Vector3(block_size, storey_height, block_size);
@@ -174,7 +214,7 @@ public class Level: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //should this be doing anything?
     }
 
     public Vector3 closestValidBlock(float x, float z) {
