@@ -138,7 +138,7 @@ public class Level: MonoBehaviour
             int cols = levelData.grid.GetLength(1);
             if (grid == null)
             {
-                grid = new Tiles[rows, cols];
+                grid = new Tiles[cols, rows];
             }
             for (int r = 0; r < rows; r++)
             {
