@@ -7,9 +7,9 @@ using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Newtonsoft.Json;
+using Newtonsoft.Json; // This needs to be installed from com.unity.nuget.newtonsoft-json in Package Manager
 using System.Data;
-using UnityEditor.Il2Cpp; // This needs to be installed from com.unity.nuget.newtonsoft-json in Package Manager
+using UnityEditor.Il2Cpp; 
 
 public enum Tiles
 {
@@ -83,7 +83,16 @@ public class Level: MonoBehaviour
                 grid[i, j] = gen[UnityEngine.Random.Range(0, 3)];
     }
 
-
+    //
+    // Summary:
+    //     Loads grid from a json file given by the inputted path
+    //
+    // Parameters:
+    //   path:
+    //     The file path to the json file with LevelData
+    //
+    // Returns:
+    //     Does not return anything but has side effect of setting values of grid
     void loadGridFromFile(string path)
     {
         if (File.Exists(path))
@@ -93,33 +102,27 @@ public class Level: MonoBehaviour
             {
                 throw new Exception("File is empty or could not be read");
             }
-            Debug.Log("json_data: " + json_data);
-            
+             
             LevelData levelData = JsonConvert.DeserializeObject<LevelData>(json_data);
             if (levelData == null)
             {
                 throw new Exception("Failed to deserialize level data");
             }
             
-            Debug.Log("Level name: " + levelData.name);
-
-            Debug.Log("Grid: " + levelData.grid[2,2]);
-            Debug.Log("Grid Rows: " + levelData.grid.GetLength(0));
-            Debug.Log("Grid Cols: " + levelData.grid.GetLength(1));
+            // JSON map data is stored as row order (r,c). grid is in col order (w,l)
+            // transformations are used below to get the map rendered properly
             int rows = levelData.grid.GetLength(0);
             int cols = levelData.grid.GetLength(1);
-            
             for (int r = 0; r < rows; r++)
             {
                 for (int c = 0; c < cols; c++)
                 {
                     int tileValue = levelData.grid[r,c];
-                    Debug.Log("levelData.grid[" + r + "," + c + "] = " + tileValue);
-                    grid[c,r] = (Tiles) tileValue;
+                    // [r,c] -> [c,r] : to change from row to col order
+                    // row - 1 - r    : to flip image in correct orientation
+                    grid[c, rows - 1 - r] = (Tiles) tileValue;
                 }
             }
-            
-            
             Debug.Log("Grid successfully loaded from file");
         }
         else
