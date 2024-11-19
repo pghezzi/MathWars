@@ -347,7 +347,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   standardEnemyPrefab: {fileID: 918728080}
   spawnPoint: {fileID: 230479303}
-  enemiesPerWave: 10
+  endPoint: {fileID: 1303557653}
+  level: {fileID: 1744286105}
+  enemiesPerWave: 5
   timeBetweenWaves: 5
   timeBetweenSpawns: 1
 --- !u!4 &721262196
@@ -557,7 +559,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 95039602943946200, guid: aa2d47f95b34fbe4d9cbe095f13585b5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 95039602943946200, guid: aa2d47f95b34fbe4d9cbe095f13585b5, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 053427ed002c70049b2a6654541f0177, type: 2}
+    m_RemovedComponents:
+    - {fileID: 54606055775698280, guid: aa2d47f95b34fbe4d9cbe095f13585b5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -601,6 +612,7 @@ MonoBehaviour:
   width: 0
   length: 0
   storey_height: 2
+  endPoint: {fileID: 0}
 --- !u!4 &1744286106
 Transform:
   m_ObjectHideFlags: 0

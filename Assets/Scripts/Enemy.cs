@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -10,7 +11,14 @@ public class Enemy : MonoBehaviour
     public bool isFlying = false;
 
     private List<Vector3> path;
+    private Vector3 direction;
     private int currentWaypoint = 0;
+    Animator anim;
+
+    public void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     public void SetPath(List<Vector3> newPath)
     {
@@ -30,6 +38,15 @@ public class Enemy : MonoBehaviour
 
         Vector3 target = path[currentWaypoint];
         Vector3 direction = (target - transform.position).normalized;
+
+        anim.SetBool("Walk",true);
+        Vector2Int facing = new Vector2Int((int)(Mathf.Round(direction.x*10f)*.1f),(int)(Mathf.Round(direction.z * 10f) * .1f));
+
+        Debug.Log($"direction: {direction}, facing: {facing}");
+        if (facing.Equals(new Vector2Int(0, 1))) { transform.rotation = Quaternion.Euler(0, 0, 0); }
+        if (facing.Equals(new Vector2Int(1, 0))) { transform.rotation = Quaternion.Euler(0, 90, 0); }
+        if (facing.Equals(new Vector2Int(0, -1))) { transform.rotation = Quaternion.Euler(0, 180, 0); }
+        if (facing.Equals(new Vector2Int(-1, 0))) { transform.rotation = Quaternion.Euler(0, 270, 0); }
         transform.position += direction * speed * Time.deltaTime;
 
         if (Vector3.Distance(transform.position, target) < 0.1f)
@@ -51,6 +68,15 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        string collisionType = collision.gameObject.tag;
+        if (collisionType == "projectile")
+        {
+            TakeDamage(1);
+        }
     }
 }
 
