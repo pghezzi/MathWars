@@ -47,6 +47,7 @@ public class Level: MonoBehaviour
     int storey_height   = 2;
     private Bounds bounds;
     public Tiles[,] grid;
+    public string level_name; 
 
     //  Start is called before the first frame update
     void Start()
@@ -58,7 +59,6 @@ public class Level: MonoBehaviour
 
         //  file loc setup
         string project_directoy = Directory.GetCurrentDirectory() + "/Assets/Levels/";
-        string level_name = "level1.json";
         string file_path = project_directoy + level_name;
         
         //  debug for testing, comment out in final
