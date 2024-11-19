@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6e06b6d0c696f9544b327c597d334766, type: 2}
+  - {fileID: 2100000, guid: b8569b1cc60e62e42b6e53f44242c283, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -144,7 +144,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6e06b6d0c696f9544b327c597d334766, type: 2}
+  - {fileID: 2100000, guid: b8569b1cc60e62e42b6e53f44242c283, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -227,7 +227,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6e06b6d0c696f9544b327c597d334766, type: 2}
+  - {fileID: 2100000, guid: b8569b1cc60e62e42b6e53f44242c283, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -310,7 +310,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6e06b6d0c696f9544b327c597d334766, type: 2}
+  - {fileID: 2100000, guid: b8569b1cc60e62e42b6e53f44242c283, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -393,7 +393,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6e06b6d0c696f9544b327c597d334766, type: 2}
+  - {fileID: 2100000, guid: b8569b1cc60e62e42b6e53f44242c283, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -476,7 +476,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6e06b6d0c696f9544b327c597d334766, type: 2}
+  - {fileID: 2100000, guid: b8569b1cc60e62e42b6e53f44242c283, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -547,7 +547,7 @@ Animator:
   m_GameObject: {fileID: 187918}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: d052d933598dac241a51c227cfe7a313, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 490ba0fbb993cf549a308b8bb1beb241, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
