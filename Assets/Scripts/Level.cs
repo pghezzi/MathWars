@@ -33,31 +33,35 @@ public class LevelData
 public class Level: MonoBehaviour
 {
 
-    int bounds_min_x;
-    int bounds_min_z;
-    int bounds_max_x;
-    int bounds_max_z;
-    int bounds_size_x;
-    int bounds_size_z;
-    int block_size;
+    public int bounds_min_x;
+    public int bounds_min_z;
+    public int bounds_max_x;
+    public int bounds_max_z;
+    public int bounds_size_x;
+    public int bounds_size_z;
+    public int block_size;
 
-
-    int width;
-    int length;
-    int storey_height   = 2;
-    private Bounds bounds;
+    public int width;
+    public int length;
+    public int storey_height = 2;
     public Tiles[,] grid;
-    public string level_name; 
+    private Bounds bounds;
+    private AStarPathfinding pathfinding;
+    public Transform endPoint;
 
     //  Start is called before the first frame update
     void Start()
     {
-        //  move to globals or some sort of file storage
-        bounds_min_x    = 0;
-        bounds_min_z    = 0;
-        block_size      = 10;
-
-        //  file loc setup
+        bounds_min_x = 0;
+        bounds_min_z = 0;
+        bounds_max_x = 200;
+        bounds_max_z = 100;
+        block_size = 10;
+        bounds_size_x = bounds_max_x - bounds_min_x;
+        bounds_size_z = bounds_max_z - bounds_min_z;
+        width = bounds_size_x / block_size;
+        length = bounds_size_z / block_size;
+        grid = new Tiles[width, length]; 
         string project_directoy = Directory.GetCurrentDirectory() + "/Assets/Levels/";
         string file_path = project_directoy + level_name;
         
@@ -75,6 +79,7 @@ public class Level: MonoBehaviour
         bounds_max_x    = bounds_size_x + bounds_min_x;
         bounds_max_z    = bounds_size_z + bounds_min_z;
         drawgrid();
+        pathfinding = new AStarPathfinding(grid);
     }
 
     //
@@ -208,7 +213,7 @@ public class Level: MonoBehaviour
                     cube.GetComponent<Renderer>().material.color = new Color(0f, 0f, 0f);
                 }
             }
-        }
+        }       
     }
 
     // Update is called once per frame
@@ -232,7 +237,43 @@ public class Level: MonoBehaviour
         int w = (int)((x - bounds_min_x) / block_size);
         int l = (int)((z - bounds_min_z) / block_size);
         grid[w, l] = Tiles.Tower;
+
+        RecalculatePaths();
     }
+
+    public void RecalculatePaths()
+    {
+        // Inform all active enemies to recalculate their paths
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        foreach (Enemy enemy in enemies)
+        {
+            // Convert enemy's current position to grid coordinates
+            Vector2Int start = new Vector2Int(
+                Mathf.RoundToInt(enemy.transform.position.x / block_size),
+                Mathf.RoundToInt(enemy.transform.position.z / block_size)
+            );
+
+            // Convert endPoint's position to grid coordinates
+            Vector2Int end = new Vector2Int(
+                Mathf.RoundToInt(endPoint.position.x / block_size),
+                Mathf.RoundToInt(endPoint.position.z / block_size)
+            );
+
+            // Calculate the new path
+            List<Vector3> newPath = pathfinding.FindPath(start, end, block_size);
+            if (newPath.Count > 0)
+            {
+                enemy.SetPath(newPath);
+                Debug.Log($"Recalculated path for enemy at {enemy.transform.position}. New path length: {newPath.Count}");
+            }
+            else
+            {
+                Debug.LogWarning($"No path found for enemy at {enemy.transform.position} from {start} to {end}");
+            }
+        }
+    }
+
+
 }
 
 public class PriorityQueue<T>
@@ -262,6 +303,17 @@ public class PriorityQueue<T>
     public int Count()
     {
         return queue.Count;
+    }
+    public bool Contains(T obj)
+    {
+        foreach (var item in queue)
+        {
+            if (EqualityComparer<T>.Default.Equals(item.obj, obj))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
