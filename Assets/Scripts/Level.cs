@@ -63,6 +63,7 @@ public class Level: MonoBehaviour
         length = bounds_size_z / block_size;
         grid = new Tiles[width, length]; 
         string project_directoy = Directory.GetCurrentDirectory() + "/Assets/Levels/";
+        string level_name = "level1.json";
         string file_path = project_directoy + level_name;
         
         //  debug for testing, comment out in final
