@@ -507,7 +507,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 411524}
-  - component: {fileID: 9566220}
   - component: {fileID: -7194035622498616750}
   m_Layer: 0
   m_Name: Tower Mage Placing
@@ -537,27 +536,6 @@ Transform:
   - {fileID: 450010}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &9566220
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 187918}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: d052d933598dac241a51c227cfe7a313, type: 3}
-  m_Controller: {fileID: 9100000, guid: 490ba0fbb993cf549a308b8bb1beb241, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &-7194035622498616750
 MonoBehaviour:
   m_ObjectHideFlags: 0

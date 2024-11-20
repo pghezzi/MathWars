@@ -4,33 +4,37 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private GameObject closest;
+    private GameObject target;
     private float damage;
     private float velocity;
+
+
+    private void Start()
+    {
+        
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (closest != null) {
+        if (target != null) {
             transform.Translate(
-                velocity * (closest.transform.position - transform.position).normalized
+                velocity * Time.deltaTime * (target.transform.position - transform.position).normalized
             );
         }
     }
 
-    public void SetupProjectile(GameObject closest, float damage, float velocity)
+    public void SetupProjectile(GameObject target, float damage, float velocity)
     {
         this.damage = damage;
         this.velocity = velocity;
-        this.closest = closest;
+        this.target = target;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject != target) return;
+        collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
         Destroy(gameObject);
-        if (collision.gameObject == closest)
-        {
-            collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
-        }
     }
 }
