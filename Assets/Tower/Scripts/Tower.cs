@@ -7,10 +7,12 @@ public class Tower : MonoBehaviour
 {
 
     //Level level;
-    GameObject closest;
-    string tag;
+    private GameObject closest;
+    private GameObject currProjectile;
+    private float blocksize;
+
+    [SerializeField] string targetsTag;
     [SerializeField] GameObject projectile;
-    GameObject currProjectile;
     [SerializeField] float damage;
     [SerializeField] float range;
     [SerializeField] float velocity;
@@ -18,13 +20,13 @@ public class Tower : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        blocksize = GameObject.FindGameObjectWithTag("Level").GetComponent<Level>().block_size;
         StartCoroutine(Shoot());
     }
 
     // Update is called once per frame
     void Update()
     {
-
         closest = Closest(tag);
     }
 
@@ -36,7 +38,7 @@ public class Tower : MonoBehaviour
                 
                 currProjectile = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y + 18, transform.position.z), transform.rotation);
                 Projectile p = currProjectile.GetComponent<Projectile>();
-                p.SetupProjectile(closest, damage, velocity);
+                p.SetupProjectile(closest, damage, blocksize * velocity);
             }
             yield return new WaitForSeconds(1);
         } 
@@ -44,7 +46,7 @@ public class Tower : MonoBehaviour
 
     GameObject Closest(string tag)
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("GroundEnemy");
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(tag);
         float min = float.MaxValue;
         GameObject closest = null;
         foreach (GameObject enemy in enemies)
