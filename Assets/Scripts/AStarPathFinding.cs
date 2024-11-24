@@ -27,15 +27,15 @@ public class AStarPathfinding
     {
         PriorityQueue<Vector2Int> openSet = new PriorityQueue<Vector2Int>();
         Dictionary<Vector2Int, Vector2Int> cameFrom = new Dictionary<Vector2Int, Vector2Int>();
-        Dictionary<Vector2Int, int> gScore = new Dictionary<Vector2Int, int>();
-        Dictionary<Vector2Int, int> fScore = new Dictionary<Vector2Int, int>();
+        Dictionary<Vector2Int, float> gScore = new Dictionary<Vector2Int, float>();
+        Dictionary<Vector2Int, float> fScore = new Dictionary<Vector2Int, float>();
 
         foreach (var x in Enumerable.Range(0, width))
         {
             foreach (var y in Enumerable.Range(0, height))
             {
-                gScore[new Vector2Int(x, y)] = int.MaxValue;
-                fScore[new Vector2Int(x, y)] = int.MaxValue;
+                gScore[new Vector2Int(x, y)] = float.MaxValue;
+                fScore[new Vector2Int(x, y)] = float.MaxValue;
             }
         }
 
@@ -55,9 +55,10 @@ public class AStarPathfinding
             {
                 Vector2Int neighbor = current + dir;
 
-                if (IsInBounds(neighbor) && grid[neighbor.x, neighbor.y] == Tiles.Path)
+                if (IsInBounds(neighbor) && (grid[neighbor.x, neighbor.y] == Tiles.Path || grid[neighbor.x, neighbor.y] == Tiles.Empty))
                 {
-                    int tentativeGScore = gScore[current] + 1;
+                    float movementCost = 1 + UnityEngine.Random.Range(0f, 0.5f);
+                    float tentativeGScore = gScore[current] + movementCost;
                     if (tentativeGScore < gScore[neighbor])
                     {
                         cameFrom[neighbor] = current;
@@ -81,10 +82,11 @@ public class AStarPathfinding
         return position.x >= 0 && position.x < width && position.y >= 0 && position.y < height;
     }
 
-    private int Heuristic(Vector2Int a, Vector2Int b)
+    private float Heuristic(Vector2Int a, Vector2Int b)
     {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y); // Manhattan distance
     }
+
 
     private List<Vector3> ReconstructPath(Dictionary<Vector2Int, Vector2Int> cameFrom, Vector2Int current, float blockSize)
     {

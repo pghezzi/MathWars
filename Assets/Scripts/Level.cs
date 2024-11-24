@@ -63,7 +63,7 @@ public class Level: MonoBehaviour
         length = bounds_size_z / block_size;
         grid = new Tiles[width, length]; 
         string project_directoy = Directory.GetCurrentDirectory() + "/Assets/Levels/";
-        string level_name = "level1.json";
+        string level_name = "level2.json";
         string file_path = project_directoy + level_name;
         
         //  debug for testing, comment out in final
@@ -284,7 +284,7 @@ public class PriorityQueue<T>
 
     public PriorityQueue() { queue = new SortedSet<PriorityQueueObject<T>>(); }
 
-    public void Add(T obj, int priority)
+    public void Add(T obj, float priority)
     {
         queue.Add(new PriorityQueueObject<T>(obj, priority, a++));
     }
@@ -323,10 +323,10 @@ public class PriorityQueue<T>
 public class PriorityQueueObject<T> : IComparable<PriorityQueueObject<T>>
 {
     public T obj { get; set; }
-    public int priority { get; set; }
+    public float priority { get; set; }
     public int ex { get; set; }
 
-    public PriorityQueueObject(T obj, int priority, int ex)
+    public PriorityQueueObject(T obj, float priority, int ex)
     {
         this.obj = obj;
         this.priority = priority;
@@ -338,7 +338,6 @@ public class PriorityQueueObject<T> : IComparable<PriorityQueueObject<T>>
         int order = priority.CompareTo(other.priority);
         if (order == 0) return ex.CompareTo(other.ex);
         return order;
-
     }
 }
 
