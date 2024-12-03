@@ -424,11 +424,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4886101968738366}
-  - component: {fileID: 54254021876192096}
   - component: {fileID: 65306087575105876}
   - component: {fileID: 95995790678533120}
   - component: {fileID: 114412009841591444}
-  - component: {fileID: 5582775249616154223}
+  - component: {fileID: 3688215460002123930}
   m_Layer: 0
   m_Name: Lion
   m_TagString: Untagged
@@ -446,7 +445,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.8632899, z: 0, w: 0.5047084}
   m_LocalPosition: {x: -2.99, y: -0.019, z: 0.58}
-  m_LocalScale: {x: 1.8907, y: 1.8907, z: 1.8907}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4309524265304134}
@@ -458,33 +457,6 @@ Transform:
   - {fileID: 4900123827302472}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 119.37601, z: 0}
---- !u!54 &54254021876192096
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553991042791506}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &65306087575105876
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -539,10 +511,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40079260bda69f14c80332a04d1632a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3
+  movementSpeed: 4
   jumpForce: 300
   timeBeforeNextJump: 1.2
---- !u!114 &5582775249616154223
+--- !u!114 &3688215460002123930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -551,9 +523,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1553991042791506}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a29a0f954c0ab42f09d8788e2ca92cc7, type: 3}
+  m_Script: {fileID: 11500000, guid: 33f543939cf1d43df819627e80d049ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 500
+  speed: 4
+  damage: 10
+  isFlying: 0
 --- !u!1 &1559099344501894
 GameObject:
   m_ObjectHideFlags: 0

@@ -346,9 +346,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   standardEnemyPrefab: {fileID: 918728080}
+  flyingEnemyPrefab: {fileID: 1866390378080362, guid: ea09f74638baa144b976a6d30cfeb5c0, type: 3}
+  heavyEnemyPrefab: {fileID: 1553991042791506, guid: d2edcf95960b81249bf3f4a30ad1a908, type: 3}
   spawnPoint: {fileID: 230479303}
   endPoint: {fileID: 1303557653}
   level: {fileID: 1744286105}
+  levelDifficulty: 80
   enemiesPerWave: 5
   timeBetweenWaves: 5
   timeBetweenSpawns: 1

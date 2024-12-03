@@ -17,6 +17,16 @@ public class Enemy : MonoBehaviour
 
     public void Start()
     {
+        float prob = Random.Range(0f, 1f);
+
+        if(prob < .33)
+        {
+            speed -= 1;
+        }else if(prob > .66)
+        {
+            speed += 1;
+        }
+
         anim = GetComponent<Animator>();
     }
 
