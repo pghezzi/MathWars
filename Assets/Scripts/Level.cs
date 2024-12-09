@@ -45,6 +45,7 @@ public class Level: MonoBehaviour
     public int length;
     public int storey_height = 2;
     public Tiles[,] grid;
+    public string level_name; 
     private Bounds bounds;
     private AStarPathfinding pathfinding;
     public Transform endPoint;
@@ -63,11 +64,17 @@ public class Level: MonoBehaviour
         length = bounds_size_z / block_size;
         grid = new Tiles[width, length]; 
         string project_directoy = Directory.GetCurrentDirectory() + "/Assets/Levels/";
-        string level_name = "level2.json";
+        
+        // Set default level if level is not specified
+        // This will happen if you try to directly build SampleLevel
+        if (level_name == "")
+        {
+            level_name = "level2.json";
+        }
         string file_path = project_directoy + level_name;
         
         //  debug for testing, comment out in final
-        Debug.Log(file_path);
+        Debug.Log($"file_path: {file_path}");
         
         //  randgrid is for testing ONLY
         //  randGrid(10, 20);
