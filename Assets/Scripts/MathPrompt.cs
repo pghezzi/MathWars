@@ -45,7 +45,7 @@ public class MathPrompt : MonoBehaviour
         if (time >= 0)
         {
             time -= Time.deltaTime;
-            timerText.text = $"{Mathf.Ceil(time)}";
+            timerText.text = $"Time Remaining: {Mathf.Ceil(time)}";
         }
     }
 
@@ -84,6 +84,7 @@ public class MathPrompt : MonoBehaviour
     void handleCorrectAnswer()
     {
         time = timerDuration;
+        answerInput.text = "";
         generateRandomQuestion();
     }
     
