@@ -49,6 +49,11 @@ public class Level: MonoBehaviour
     private Bounds bounds;
     private AStarPathfinding pathfinding;
     public Transform endPoint;
+    
+    // Texture Material References -- maybe this should be moved to levelX.json files?
+    public Material unplaceableMaterial;
+    public Material pathMaterial;
+    public Material emptyMaterial;
 
     //  Start is called before the first frame update
     void Start()
@@ -200,7 +205,15 @@ public class Level: MonoBehaviour
                     cube.name = "EMPTY";
                     cube.transform.localScale = new Vector3(block_size, storey_height, block_size);
                     cube.transform.position = new Vector3(x + 0.5f, y + storey_height / 2.0f, z + 0.5f);
-                    cube.GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
+                    if (emptyMaterial != null)
+                    {
+                        cube.GetComponent<Renderer>().material = emptyMaterial;
+                    }
+                    else
+                    {
+                        Debug.Log($"emptyMaterial is null");
+                        cube.GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
+                    }
                 }
                 else if (grid[w, l] == Tiles.Path)
                 {
@@ -209,7 +222,15 @@ public class Level: MonoBehaviour
                     cube.name = "PATH";
                     cube.transform.localScale = new Vector3(block_size, storey_height, block_size);
                     cube.transform.position = new Vector3(x + 0.5f, y + storey_height / 2.0f, z + 0.5f);
-                    cube.GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f);
+                    if (pathMaterial != null)
+                    {
+                        cube.GetComponent<Renderer>().material = pathMaterial;
+                    }
+                    else
+                    {
+                        Debug.Log($"pathMaterial is null");
+                        cube.GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f);
+                    }
                 }
                 else if (grid[w, l] == Tiles.Unplacable)
                 {
@@ -218,7 +239,15 @@ public class Level: MonoBehaviour
                     cube.name = "UNPLACABLE";
                     cube.transform.localScale = new Vector3(block_size, storey_height, block_size);
                     cube.transform.position = new Vector3(x + 0.5f, y + storey_height / 2.0f, z + 0.5f);
-                    cube.GetComponent<Renderer>().material.color = new Color(0f, 0f, 0f);
+                    if (unplaceableMaterial != null)
+                    {
+                        cube.GetComponent<Renderer>().material = unplaceableMaterial;
+                    }
+                    else
+                    {
+                        Debug.Log($"unplaceableMaterial is null");
+                        cube.GetComponent<Renderer>().material.color = new Color(0f, 0f, 0f);
+                    }
                 }
             }
         }       

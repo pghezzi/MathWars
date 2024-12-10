@@ -856,7 +856,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 062e119a18ebe314bac46408b8ebd652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bounds_min_x: 0
+  bounds_min_z: 0
+  bounds_max_x: 0
+  bounds_max_z: 0
+  bounds_size_x: 0
+  bounds_size_z: 0
+  block_size: 0
+  width: 0
+  length: 0
+  storey_height: 2
   level_name: level1.json
+  endPoint: {fileID: 0}
+  unplaceableMaterial: {fileID: 2100000, guid: 38efa2495a27ae64cb42617019e33b32, type: 2}
+  pathMaterial: {fileID: 2100000, guid: d7a14fdd33ecb1e4a932c17c599120fb, type: 2}
+  emptyMaterial: {fileID: 2100000, guid: 1e16b642109be7040a7f589235223c46, type: 2}
 --- !u!4 &1744286106
 Transform:
   m_ObjectHideFlags: 0
