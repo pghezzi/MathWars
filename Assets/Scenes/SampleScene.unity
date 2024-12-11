@@ -940,6 +940,9 @@ MonoBehaviour:
   storey_height: 2
   level_name: 
   endPoint: {fileID: 1303557653}
+  unplaceableMaterial: {fileID: 0}
+  pathMaterial: {fileID: 0}
+  emptyMaterial: {fileID: 0}
 --- !u!4 &1744286106
 Transform:
   m_ObjectHideFlags: 0

@@ -5,6 +5,8 @@ public class MathPrompt : MonoBehaviour
 {
     int number1;
     int number2;
+    private int prevNumber1; 
+    private int prevNumber2; 
     string op;
     int answer;
     string[] operators = {"+", "-", "x", "÷"};
@@ -45,13 +47,13 @@ public class MathPrompt : MonoBehaviour
         if (time >= 0)
         {
             time -= Time.deltaTime;
-            timerText.text = $"{Mathf.Ceil(time)}";
+            timerText.text = $"Time Remaining: {Mathf.Ceil(time)}";
         }
     }
 
-    int getAnswer(int num1, int num2, string op)
+    float getAnswer(int num1, int num2, string op)
     {
-        int result = 0;
+        float result = 0;
         switch (op)
         {
             case "+":
@@ -64,19 +66,27 @@ public class MathPrompt : MonoBehaviour
                 result = num1 * num2;
                 break;
             case "÷":
-                // Real division will lead to floats but integer division is also weird
-                result = num1 / num2;
+                result = (float) num1 / (float) num2;
                 break;
         }
         return result;
     }
-
+    
     void generateRandomQuestion()
     {
-        number1 = Random.Range(0, 13);
-        number2 = Random.Range(0, 13);
-        op = operators[Random.Range(0,operators.Length)];
-        answer = getAnswer(number1, number2, op);
+        op = operators[Random.Range(0, operators.Length)];
+        float possibleAnswer = -1f; 
+        // ensures only non-negative answers and integers and not same question as last time
+        while ((possibleAnswer < 0 || possibleAnswer % 1 != 0)
+                || (number1 == prevNumber1 && number2 == prevNumber2))
+        {
+            number1 = Random.Range(0, 13);
+            number2 = Random.Range(0, 13);
+            possibleAnswer = getAnswer(number1, number2, op);
+        }
+        answer = (int) possibleAnswer;
+        prevNumber1 = number1;
+        prevNumber2 = number2;
         questionString = $"{number1} {op} {number2}";
         questionText.text = questionString; 
     }
@@ -84,6 +94,7 @@ public class MathPrompt : MonoBehaviour
     void handleCorrectAnswer()
     {
         time = timerDuration;
+        answerInput.text = "";
         generateRandomQuestion();
     }
     
