@@ -850,6 +850,7 @@ GameObject:
   - component: {fileID: 2179944038883323014}
   - component: {fileID: 7206746381467887722}
   - component: {fileID: 4494204918896324126}
+  - component: {fileID: 3566874402580341731}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -958,7 +959,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7206746381467887722}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3566874402580341731}
+        m_TargetAssemblyTypeName: TowerCreateButton, Assembly-CSharp
+        m_MethodName: onClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 5970098067017488239, guid: fcd30ac45f3b5ab4c8806f2563260a3d, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3566874402580341731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7703812808796679080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ce0ae69c7d2a644870f2a5b36df911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8178038160433865385
 GameObject:
   m_ObjectHideFlags: 0

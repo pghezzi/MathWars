@@ -14,12 +14,12 @@ public class Tower : MonoBehaviour
     [SerializeField] string targetsTag;
     [SerializeField] GameObject projectile;
     [SerializeField] float damage;
-    [SerializeField] float range;
     [SerializeField] float velocity;
 
     // Start is called before the first frame update
     void Start()
     {
+        currProjectile = null;
         blocksize = GameObject.FindGameObjectWithTag("Level").GetComponent<Level>().block_size;
         StartCoroutine(Shoot());
     }
@@ -27,7 +27,7 @@ public class Tower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        closest = Closest(tag);
+        closest = Closest(targetsTag);
     }
 
     IEnumerator Shoot()
@@ -35,8 +35,8 @@ public class Tower : MonoBehaviour
         while (true) {
             if (closest != null && currProjectile == null)
             {
-                
                 currProjectile = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y + 18, transform.position.z), transform.rotation);
+                currProjectile.transform.localScale = new Vector3(blocksize, blocksize, blocksize);
                 Projectile p = currProjectile.GetComponent<Projectile>();
                 p.SetupProjectile(closest, damage, blocksize * velocity);
             }
@@ -58,7 +58,6 @@ public class Tower : MonoBehaviour
                 closest = enemy;
             }
         }
-        if (min > range) return null;
         return closest;
     }
 

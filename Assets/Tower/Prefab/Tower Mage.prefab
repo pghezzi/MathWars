@@ -570,8 +570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09649f3b8a3b63e4095b0261d05469d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tag: Untagged
+  targetsTag: GroundEnemy
   projectile: {fileID: 4661981500207589019, guid: 016da2df184f0344792ce54bb5373131, type: 3}
   damage: 0
-  range: 0
-  velocity: 0
+  velocity: 5

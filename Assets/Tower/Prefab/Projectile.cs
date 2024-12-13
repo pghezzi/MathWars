@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,11 @@ public class Projectile : MonoBehaviour
                 velocity * Time.deltaTime * (target.transform.position - transform.position).normalized
             );
         }
+        if((target.transform.position - transform.position).magnitude < 0.1)
+        {
+            target.GetComponent<Enemy>().TakeDamage(damage);
+            Destroy(gameObject);
+        }
     }
 
     public void SetupProjectile(GameObject target, float damage, float velocity)
@@ -29,12 +35,5 @@ public class Projectile : MonoBehaviour
         this.damage = damage;
         this.velocity = velocity;
         this.target = target;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject != target) return;
-        collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
-        Destroy(gameObject);
     }
 }
