@@ -19,6 +19,7 @@ public class TowerCreateButton : MonoBehaviour
         GameObject tower = Instantiate(towerToCreate);
         tower.transform.localScale = new UnityEngine.Vector3(10.0f, 10.0f, 10.0f);
         tower.transform.position = new UnityEngine.Vector3(pos[0], 0, pos[1]);
+        tpui.deactivate();
     }
 
 }

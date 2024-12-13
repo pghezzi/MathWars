@@ -29,6 +29,7 @@ public class TowerPlacingUI : MonoBehaviour
         Vector3 pointOnLine = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
         Vector3 intersect = level.LineIntersection(pointOnLine, pointOnLine - cam.transform.position);
         Vector3 recalc = level.closestValidBlock(intersect.x, intersect.z);
+        Debug.Log(recalc);
         if (recalc.y == 0)
         {
             selected_x = recalc.x;
@@ -42,8 +43,14 @@ public class TowerPlacingUI : MonoBehaviour
         }
     }
 
+    public void deactivate()
+    {
+        towerPlacing.GameObject().SetActive(false);
+    }
+
     public float[] CurrentPos()
     {
+        level.AddTower(selected_x, selected_y);
         return new float[] { selected_x , selected_y };
     }
 }
