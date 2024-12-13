@@ -33,12 +33,12 @@ public class LevelData
 public class Level: MonoBehaviour
 {
 
-    public int bounds_min_x;
-    public int bounds_min_z;
-    public int bounds_max_x;
-    public int bounds_max_z;
-    public int bounds_size_x;
-    public int bounds_size_z;
+    [SerializeField] int bounds_min_x;
+    [SerializeField] int bounds_min_z;
+    [SerializeField] int bounds_max_x;
+    [SerializeField] int bounds_max_z;
+    [SerializeField] int bounds_size_x;
+    [SerializeField] int bounds_size_z;
     public int block_size;
 
     public int width;
@@ -54,6 +54,7 @@ public class Level: MonoBehaviour
     public Material unplaceableMaterial;
     public Material pathMaterial;
     public Material emptyMaterial;
+    private Vector3 midpoint;
 
     //  Start is called before the first frame update
     void Start()
@@ -91,6 +92,12 @@ public class Level: MonoBehaviour
         bounds_size_z   = length * block_size;
         bounds_max_x    = bounds_size_x + bounds_min_x;
         bounds_max_z    = bounds_size_z + bounds_min_z;
+        midpoint = new Vector3(
+                (bounds_size_x) / 2 + bounds_min_x,
+                storey_height/2,
+                (bounds_size_z) / 2 + bounds_min_z
+        );
+
         drawgrid();
         pathfinding = new AStarPathfinding(grid);
     }
@@ -259,14 +266,20 @@ public class Level: MonoBehaviour
         //should this be doing anything?
     }
 
+    public Vector3 LineIntersection(Vector3 point, Vector3 line)
+    {
+        Vector3 normal = new Vector3(0, 1, 0);
+        float a = Vector3.Dot(midpoint - point, normal);
+        float b = Vector3.Dot(line, normal);
+        return (a / b) * line + point;
+    }
+
     public Vector3 closestValidBlock(float x, float z) {
-        int w = Math.Clamp((int)((x - bounds_min_x) / block_size), 0, width - 1);
-        int l = Math.Clamp((int)((z - bounds_min_z) / block_size), 0, length - 1);
-        if (grid[w, l] != Tiles.Empty)
-        {
-            return new Vector3(0, -2, 0);
-        }
-        return new Vector3(w*block_size + bounds_min_x, 0, l * block_size + bounds_min_z);
+        int w = (int)((x + block_size/2 - bounds_min_x) / block_size);
+        int l = (int)((z + block_size/2 - bounds_min_z) / block_size);
+        if (w < 0 || l < 0 || w > width - 1 || l > length - 1) return new Vector3(0, 2, 0);
+        if (grid[w, l] != Tiles.Empty) return new Vector3(0, 2, 0);
+        return new Vector3((int)(w*block_size) + bounds_min_x, 0, (int)(l * block_size) + bounds_min_z);
     }
 
     public void AddTower(float x, float z)
