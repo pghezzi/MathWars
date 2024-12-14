@@ -9,7 +9,6 @@ public class Pause : MonoBehaviour
     
     public void handlePause()
     {
-        Debug.Log("PAUSE"); 
         // This line will pause anything that relies on time in Unity
         // If we want to still do something when timeScale is 0 we can use unscaledTime or realtime
         // Audio has a pause funciton if we need to pause it
@@ -21,7 +20,6 @@ public class Pause : MonoBehaviour
 
     public void handleResume()
     {
-        Debug.Log("RESUME");
         Time.timeScale = 1;
         Destroy(pauseScreen);
     }
