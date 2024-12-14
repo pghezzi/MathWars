@@ -55,7 +55,7 @@ public class AStarPathfinding
             {
                 Vector2Int neighbor = current + dir;
 
-                if (IsInBounds(neighbor) && (grid[neighbor.x, neighbor.y] == Tiles.Path || grid[neighbor.x, neighbor.y] == Tiles.Empty))
+                if (IsInBounds(neighbor) && (grid[neighbor.x, neighbor.y] == Tiles.Path))
                 {
                     float movementCost = 1 + UnityEngine.Random.Range(0f, 0.5f);
                     float tentativeGScore = gScore[current] + movementCost;
