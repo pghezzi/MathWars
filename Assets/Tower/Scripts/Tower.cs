@@ -51,7 +51,7 @@ public class Tower : MonoBehaviour
         GameObject closest = null;
         foreach (GameObject enemy in enemies)
         {
-            float distance = Vector3.Distance(enemy.transform.position, transform.position);
+            float distance = enemy.GetComponent<Enemy>().GetRemainingDistance();
             if (distance < min)
             {
                 min = distance;
