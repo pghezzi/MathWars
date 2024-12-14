@@ -558,7 +558,7 @@ GameObject:
   - component: {fileID: 2635539075089620686}
   m_Layer: 0
   m_Name: Condor
-  m_TagString: Untagged
+  m_TagString: AirEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

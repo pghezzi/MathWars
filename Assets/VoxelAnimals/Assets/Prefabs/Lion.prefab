@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 3688215460002123930}
   m_Layer: 0
   m_Name: Lion
-  m_TagString: Untagged
+  m_TagString: GroundEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
