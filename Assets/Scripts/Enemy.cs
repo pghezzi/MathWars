@@ -88,5 +88,21 @@ public class Enemy : MonoBehaviour
             TakeDamage(1);
         }
     }
+
+    public float GetRemainingDistance()
+    {
+        if (path == null || currentWaypoint >= path.Count) return 0f;
+
+        float distance = 0f;
+
+        for (int i = currentWaypoint; i < path.Count - 1; i++)
+        {
+            distance += Vector3.Distance(path[i], path[i + 1]);
+        }
+
+        distance += Vector3.Distance(transform.position, path[currentWaypoint]);
+
+        return distance;
+    }
 }
 
