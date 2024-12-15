@@ -12,6 +12,7 @@ public class InfoPanelManager : MonoBehaviour
     public TMP_Text wavesText; 
     public TMP_Text coinsText;
     public TMP_Text heartsText;
+    public GameObject TowerPlacer;
     
     int startingHearts;
     int startingCoins; 
@@ -51,6 +52,7 @@ public class InfoPanelManager : MonoBehaviour
         heartsText.text = startingHearts.ToString(); 
         coinsText.text = startingCoins.ToString();
         wavesText.text = $"WAVE {currWave}/{totalWaves}";
+        Instantiate(TowerPlacer);
     }
 
     // Update is called once per frame

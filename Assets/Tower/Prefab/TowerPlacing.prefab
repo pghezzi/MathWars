@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'AIR
+  m_text: 'AIR (20)
 
 '
   m_isRightToLeft: 0
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GROUND
+  m_text: GROUND (10)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d6cd566b0c4f3431b8cf99dc680b6ad7, type: 2}
   m_sharedMaterial: {fileID: 2260664482952401327, guid: d6cd566b0c4f3431b8cf99dc680b6ad7, type: 2}
@@ -383,7 +383,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: AREA
+  m_text: AREA (50)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d6cd566b0c4f3431b8cf99dc680b6ad7, type: 2}
   m_sharedMaterial: {fileID: 2260664482952401327, guid: d6cd566b0c4f3431b8cf99dc680b6ad7, type: 2}
@@ -464,6 +464,7 @@ GameObject:
   - component: {fileID: 4441146347083603165}
   - component: {fileID: 1329786326043898950}
   - component: {fileID: 1942009370101487436}
+  - component: {fileID: 4839425920966869007}
   m_Layer: 5
   m_Name: LEFT Button
   m_TagString: Untagged
@@ -572,19 +573,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1329786326043898950}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6613040828546499308}
-        m_TargetAssemblyTypeName: UIButtons, Assembly-CSharp
-        m_MethodName: playClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &4300272195667399124
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,6 +732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ce0ae69c7d2a644870f2a5b36df911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cost: 10
 --- !u!1 &5021623220144428081
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,7 +798,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Extra Points
+  m_text: Extra PTS (50)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d6cd566b0c4f3431b8cf99dc680b6ad7, type: 2}
   m_sharedMaterial: {fileID: 2260664482952401327, guid: d6cd566b0c4f3431b8cf99dc680b6ad7, type: 2}
@@ -1035,6 +1025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ce0ae69c7d2a644870f2a5b36df911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cost: 20
 --- !u!1 &8178038160433865385
 GameObject:
   m_ObjectHideFlags: 0
@@ -1047,6 +1038,7 @@ GameObject:
   - component: {fileID: 5975577985569267418}
   - component: {fileID: 5964879764997647740}
   - component: {fileID: 4534773321065918342}
+  - component: {fileID: 6688787711190988128}
   m_Layer: 5
   m_Name: RIGHT Button
   m_TagString: Untagged
@@ -1155,19 +1147,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5964879764997647740}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6613040828546499308}
-        m_TargetAssemblyTypeName: UIButtons, Assembly-CSharp
-        m_MethodName: playClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &8772343489070123776
 GameObject:
   m_ObjectHideFlags: 0

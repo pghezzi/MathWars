@@ -2732,6 +2732,7 @@ MonoBehaviour:
   wavesText: {fileID: 7045247770209698768}
   coinsText: {fileID: 996944693128193555}
   heartsText: {fileID: 5728547277515286648}
+  TowerPlacer: {fileID: 8772343489070123776, guid: 74c85e6fa06a75c4d86a349e9b979c8b, type: 3}
 --- !u!1 &8116178365999358325
 GameObject:
   m_ObjectHideFlags: 0
