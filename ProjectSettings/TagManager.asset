@@ -7,6 +7,7 @@ TagManager:
   - Level
   - AirEnemy
   - GroundEnemy
+  - Audio
   layers:
   - Default
   - TransparentFX
