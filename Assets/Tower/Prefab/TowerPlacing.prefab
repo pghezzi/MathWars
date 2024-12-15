@@ -451,6 +451,7 @@ GameObject:
   - component: {fileID: 4441146347083603165}
   - component: {fileID: 1329786326043898950}
   - component: {fileID: 1942009370101487436}
+  - component: {fileID: 4839425920966869007}
   m_Layer: 5
   m_Name: LEFT Button
   m_TagString: Untagged
@@ -559,7 +560,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1329786326043898950}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4839425920966869007}
+        m_TargetAssemblyTypeName: TowerCreateButton, Assembly-CSharp
+        m_MethodName: onClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8386996477985017556, guid: 87c3c981a66d665438703f310a1be322, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4839425920966869007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3536985024284825484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ce0ae69c7d2a644870f2a5b36df911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4300272195667399124
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,6 +1023,7 @@ GameObject:
   - component: {fileID: 5975577985569267418}
   - component: {fileID: 5964879764997647740}
   - component: {fileID: 4534773321065918342}
+  - component: {fileID: 6688787711190988128}
   m_Layer: 5
   m_Name: RIGHT Button
   m_TagString: Untagged
@@ -1106,7 +1132,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5964879764997647740}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6688787711190988128}
+        m_TargetAssemblyTypeName: TowerCreateButton, Assembly-CSharp
+        m_MethodName: onClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7904041213594128460, guid: 6b8e2e2412fd4da4cb6460237f5e4a94, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6688787711190988128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8178038160433865385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ce0ae69c7d2a644870f2a5b36df911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8772343489070123776
 GameObject:
   m_ObjectHideFlags: 0
