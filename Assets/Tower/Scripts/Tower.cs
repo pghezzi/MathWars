@@ -15,6 +15,13 @@ public class Tower : MonoBehaviour
     [SerializeField] GameObject projectile;
     [SerializeField] float damage;
     [SerializeField] float velocity;
+    
+         
+    AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +42,7 @@ public class Tower : MonoBehaviour
         while (true) {
             if (closest != null && currProjectile == null)
             {
+                audioManager.PlaySFX(audioManager.towerShooting);
                 currProjectile = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y + 18, transform.position.z), transform.rotation);
                 currProjectile.transform.localScale = new Vector3(blocksize, blocksize, blocksize);
                 Projectile p = currProjectile.GetComponent<Projectile>();
