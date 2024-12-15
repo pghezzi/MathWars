@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 2042396896764157462}
   - component: {fileID: 351273348505173913}
   m_Layer: 5
-  m_Name: New Pause Button
+  m_Name: Pause Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
