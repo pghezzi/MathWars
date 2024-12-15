@@ -571,9 +571,9 @@ MonoBehaviour:
   endPoint: {fileID: 1303557653}
   level: {fileID: 1744286105}
   levelDifficulty: 80
-  enemiesPerWave: 0
-  timeBetweenWaves: 0
-  timeBetweenSpawns: 0
+  enemiesPerWave: 5
+  timeBetweenWaves: 15
+  timeBetweenSpawns: 2
 --- !u!4 &721262196
 Transform:
   m_ObjectHideFlags: 0
