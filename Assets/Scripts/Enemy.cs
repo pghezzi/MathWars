@@ -14,6 +14,13 @@ public class Enemy : MonoBehaviour
     private Vector3 direction;
     private int currentWaypoint = 0;
     Animator anim;
+    
+         
+    AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     public void Start()
     {
@@ -28,6 +35,7 @@ public class Enemy : MonoBehaviour
         }
 
         anim = GetComponent<Animator>();
+        audioManager.PlaySFX(audioManager.enemySpawn);
     }
 
     public void SetPath(List<Vector3> newPath)
@@ -69,6 +77,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float amount)
     {
         health -= amount;
+        audioManager.PlaySFX(audioManager.enemyHit);
         if (health <= 0)
         {
             Die();

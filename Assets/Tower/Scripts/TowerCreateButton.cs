@@ -8,6 +8,13 @@ public class TowerCreateButton : MonoBehaviour
     private InfoPanelManager infoPanelManager;
     public int cost;
 
+         
+    AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     void Start()
     {
         tpui = gameObject.transform.parent.parent.GetComponent<TowerPlacingUI>();
@@ -16,6 +23,9 @@ public class TowerCreateButton : MonoBehaviour
 
     public void onClick(GameObject towerToCreate)
     {
+        Debug.Assert(towerToCreate != null);
+        Debug.Log("hey");
+        audioManager.PlaySFX(audioManager.builtTower);
         if (!infoPanelManager.canAfford(cost))
         {
             return;

@@ -18,7 +18,16 @@ public class MathPrompt : MonoBehaviour
     public TMP_Text questionText;
     public TMP_InputField answerInput;
     public TMP_Text timerText;
-    
+
+    float tickInterval = 1f; // Interval for the ticking sound
+    float tickTimer;         // Tracks time for the tick sound
+
+    AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +40,7 @@ public class MathPrompt : MonoBehaviour
     {
         updateTimer();
         closeIfTimerHasExpired();
+        playTickSound();
         
     }
     
@@ -95,12 +105,27 @@ public class MathPrompt : MonoBehaviour
     {
         time = timerDuration;
         answerInput.text = "";
+        audioManager.PlaySFX(audioManager.correctAnswer);
         generateRandomQuestion();
     }
     
     void handleWrongAnswer()
     {
+        audioManager.PlaySFX(audioManager.wrongAnswer);
         gameObject.SetActive(false);
+    }
+    
+    void playTickSound()
+    {
+        if (time > 0)
+        {
+            tickTimer -= Time.deltaTime;
+            if (tickTimer <= 0f)
+            {
+                audioManager.PlaySFX(audioManager.timerTick);
+                tickTimer = tickInterval;
+            }
+        }
     }
     
     public void checkAnswer()

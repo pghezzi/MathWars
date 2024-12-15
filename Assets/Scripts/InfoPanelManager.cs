@@ -23,6 +23,13 @@ public class InfoPanelManager : MonoBehaviour
     int MAX_COINS = 999;
     Level level;
 
+     
+    AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +67,7 @@ public class InfoPanelManager : MonoBehaviour
     {
         if (hearts > 0)
         {
+            audioManager.PlaySFX(audioManager.loseHeart);
             hearts = Mathf.Clamp(hearts - numHeartsLost, 0, startingHearts);
         }
     }
@@ -76,6 +84,7 @@ public class InfoPanelManager : MonoBehaviour
     {
         if (coins > 0)
         {
+            audioManager.PlaySFX(audioManager.spentMoney);
             coins = Mathf.Clamp(coins - numCoinsLost, 0, MAX_COINS); 
         }
     }
@@ -84,6 +93,7 @@ public class InfoPanelManager : MonoBehaviour
     {
         if (coins < MAX_COINS)
         {
+            audioManager.PlaySFX(audioManager.earnedMoney);
             coins = Mathf.Clamp(coins + numCoinGained, 0, MAX_COINS);
         }
     }
@@ -102,6 +112,7 @@ public class InfoPanelManager : MonoBehaviour
     {
         if (currWave < totalWaves)
         {
+            audioManager.PlaySFX(audioManager.newWave);
             currWave += 1;
         }
     }

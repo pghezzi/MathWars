@@ -558,6 +558,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 506585998663002089}
+        m_TargetAssemblyTypeName: UIButtons, Assembly-CSharp
+        m_MethodName: playClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8890618736907419356
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,6 +581,7 @@ GameObject:
   - component: {fileID: 4784610681026749691}
   - component: {fileID: 730319258768451705}
   - component: {fileID: 7476897062184100412}
+  - component: {fileID: 506585998663002089}
   m_Layer: 5
   m_Name: How To Play Pop Up
   m_TagString: Untagged
@@ -634,3 +647,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &506585998663002089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8890618736907419356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ac1925190544fdfab22e4821373d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
