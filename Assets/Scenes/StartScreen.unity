@@ -1086,13 +1086,61 @@ PrefabInstance:
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 1286511401418406320, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
+      propertyPath: won
+      value: 
+      objectReference: {fileID: 8300000, guid: feb06f206f3f142d99ee5b6f47e4b124, type: 3}
+    - target: {fileID: 1286511401418406320, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
+      propertyPath: lost
+      value: 
+      objectReference: {fileID: 8300000, guid: a123b4b48a2d84bbbba6a95db8473d2c, type: 3}
+    - target: {fileID: 1286511401418406320, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
       propertyPath: click
       value: 
-      objectReference: {fileID: 8300000, guid: b43d102aac6b145468dcaa94a5cccae1, type: 3}
+      objectReference: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
     - target: {fileID: 1286511401418406320, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
-      propertyPath: instance
+      propertyPath: newWave
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: cabfae866cab347928b74b7d0ca6bfa9, type: 3}
+    - target: {fileID: 1286511401418406320, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
+      propertyPath: enemyHit
+      value: 
+      objectReference: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
+    - target: {fileID: 1286511401418406320, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
+      propertyPath: loseHeart
+      value: 
+      objectReference: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
+    - target: {fileID: 1286511401418406320, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
+      propertyPath: timerTick
+      value: 
+      objectReference: {fileID: 8300000, guid: c5e2a73ad4706440f93bf05df0b465fe, type: 3}
+    - target: {fileID: 1286511401418406320, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
+      propertyPath: builtTower
+      value: 
+      objectReference: {fileID: 8300000, guid: 4f4ca3166f09e4b929efd4fcd85bbe9e, type: 3}
+    - target: {fileID: 1286511401418406320, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
+      propertyPath: enemySpawn
+      value: 
+      objectReference: {fileID: 8300000, guid: 33294b08bbfea4259a3ecdfab70e9cd1, type: 3}
+    - target: {fileID: 1286511401418406320, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
+      propertyPath: spentMoney
+      value: 
+      objectReference: {fileID: 8300000, guid: f00b7eb0868a4461db4fbbe025a01302, type: 3}
+    - target: {fileID: 1286511401418406320, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
+      propertyPath: earnedMoney
+      value: 
+      objectReference: {fileID: 8300000, guid: f06c381c0d3c644f0ab81423a371c1b1, type: 3}
+    - target: {fileID: 1286511401418406320, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
+      propertyPath: wrongAnswer
+      value: 
+      objectReference: {fileID: 8300000, guid: 62f10a614983f45368993b694676bcea, type: 3}
+    - target: {fileID: 1286511401418406320, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
+      propertyPath: correctAnswer
+      value: 
+      objectReference: {fileID: 8300000, guid: 9b8f21c9b483b4af18bedbf618776a07, type: 3}
+    - target: {fileID: 1286511401418406320, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
+      propertyPath: towerShooting
+      value: 
+      objectReference: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
     - target: {fileID: 1751557883411451838, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
       propertyPath: m_Volume
       value: 0.1
@@ -1138,8 +1186,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 4669054724794516563, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ff2c5335ca90458e9e9bd84c7d65cc1, type: 3}
