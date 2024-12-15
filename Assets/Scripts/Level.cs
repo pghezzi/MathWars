@@ -27,6 +27,9 @@ public class LevelData
 {
     public int level;
     public string name;
+    public int startingHearts;
+    public int startingCoins;
+    public int numWaves;
     public int[,] grid;
 }
 
@@ -56,6 +59,8 @@ public class Level: MonoBehaviour
     public Material pathMaterial;
     public Material emptyMaterial;
     private Vector3 midpoint;
+    
+    string project_directoy;
 
     //  Start is called before the first frame update
     void Start()
@@ -70,23 +75,18 @@ public class Level: MonoBehaviour
         width = bounds_size_x / block_size;
         length = bounds_size_z / block_size;
         grid = new Tiles[width, length]; 
-        string project_directoy = Directory.GetCurrentDirectory() + "/Assets/Levels/";
+        project_directoy = Directory.GetCurrentDirectory() + "/Assets/Levels/";
         
         // Set default level if level is not specified
         // This will happen if you try to directly build SampleLevel
-        if (level_name == "")
-        {
-            level_name = "level2.json";
-        }
-        string file_path = project_directoy + level_name;
-        
-        //  debug for testing, comment out in final
-        Debug.Log($"file_path: {file_path}");
-        
+        // if (level_name == "")
+        // {
+        //     level_name = "level2.json";
+        // }
         //  randgrid is for testing ONLY
         //  randGrid(10, 20);
         //  the function should have to deal with creating grid, will make need less globals 
-        loadGridFromFile(file_path);
+        loadGridFromFile(level_name);
         width           = grid.GetLength(0);
         length          = grid.GetLength(1);
         bounds_size_x   = width  * block_size;
@@ -142,21 +142,9 @@ public class Level: MonoBehaviour
     //
     // Returns:
     //     Does not return anything but has side effect of setting values of grid
-    void loadGridFromFile(string path)
+    void loadGridFromFile(string level_name)
     {
-        if (File.Exists(path))
-        {
-            string json_data = File.ReadAllText(path);
-            if (string.IsNullOrEmpty(json_data))
-            {
-                throw new Exception("File is empty or could not be read");
-            }
-             
-            LevelData levelData = JsonConvert.DeserializeObject<LevelData>(json_data);
-            if (levelData == null)
-            {
-                throw new Exception("Failed to deserialize level data");
-            }
+            LevelData levelData = loadLevelData(level_name);
             
             // JSON map data is stored as row order (r,c). grid is in col order (w,l)
             // transformations are used below to get the map rendered properly
@@ -177,6 +165,25 @@ public class Level: MonoBehaviour
                 }
             }
             Debug.Log("Grid successfully loaded from file");
+        }
+    
+    public LevelData loadLevelData(string level_name)
+    {
+        string path = project_directoy + level_name;
+        if (File.Exists(path))
+        {
+            string json_data = File.ReadAllText(path);
+            if (string.IsNullOrEmpty(json_data))
+            {
+                throw new Exception("File is empty or could not be read");
+            }
+             
+            LevelData levelData = JsonConvert.DeserializeObject<LevelData>(json_data);
+            if (levelData == null)
+            {
+                throw new Exception("Failed to deserialize level data");
+            }
+            return levelData;
         }
         else
         {
