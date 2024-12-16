@@ -84,6 +84,7 @@ public class Enemy : MonoBehaviour
         audioManager.PlaySFX(audioManager.enemyHit);
         if (health <= 0)
         {
+            InfoPanel.gainCoins(damage);
             Die();
         }
     }
