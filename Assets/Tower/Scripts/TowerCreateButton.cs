@@ -24,7 +24,7 @@ public class TowerCreateButton : MonoBehaviour
     public void onClick(GameObject towerToCreate)
     {
         Debug.Assert(towerToCreate != null);
-        Debug.Log("hey");
+        //Debug.Log("hey");
         audioManager.PlaySFX(audioManager.builtTower);
         if (!infoPanelManager.canAfford(cost))
         {
