@@ -15,10 +15,11 @@ public class WaveManager : MonoBehaviour
     public int levelDifficulty;
 
     public int enemiesPerWave = 1;     
-    public float timeBetweenWaves = 5f;   // Not used since only one wave
-    public float timeBetweenSpawns = 1f;
+    public float timeBetweenWaves = 5f;   
+    public float timeBetweenSpawns = 1.5f;
     public int numWaves = 3;
-    public int totalEnemies ;
+    public int totalEnemies;
+    public bool betweenWaves;
 
     private List<string> enemies; 
 
@@ -49,7 +50,7 @@ public class WaveManager : MonoBehaviour
 
 
         InfoPanel = GameObject.Find("Info Panel").GetComponent<InfoPanelManager>();
-        
+        betweenWaves = false;
 
         // The WaveManager will not begin spawning until we tell it to        
         isSpawning = false;
@@ -77,6 +78,7 @@ public class WaveManager : MonoBehaviour
         for (int i = 0; i < numWaves; i++)
         {
             currentWave++;
+            betweenWaves = false;
             Debug.Log("Wave " + currentWave + " starting!");
             foreach (string enemy in enemies)
             {
@@ -91,10 +93,12 @@ public class WaveManager : MonoBehaviour
             }
             
             Debug.Log("Wave " + (i+1) + " complete");
+            betweenWaves = true;
             yield return new WaitForSeconds(timeBetweenWaves);
             InfoPanel.incrementWave();
+            
         }
-
+        betweenWaves = false;
         Debug.Log("All waves completed.");
         yield break; // Exit the coroutine after one wave
     }
@@ -150,21 +154,24 @@ public class WaveManager : MonoBehaviour
     List<string> InitializeEnemies() //Initialize list of enemies to spawn based on level difficulty
     {
         List<string> enemies = new List<string>();
-
+        Debug.Log("Level Difficulty: " + levelDifficulty);
         int numStandard = 0;
         int numFlying = 0;
         int numHeavy = 0;
-        if (levelDifficulty < 33)
+        if (levelDifficulty <= 33)
         {
+            Debug.Log("Level gets just cats");
             numStandard = Mathf.CeilToInt(levelDifficulty / 3.3f);
         }
-        if(levelDifficulty >= 66)
+        if(levelDifficulty > 33)
         {
+            Debug.Log("Level gets cats and condors");
             numStandard = 10;
             numFlying = Mathf.CeilToInt((levelDifficulty % 33) / 3.3f);
         }
         if(levelDifficulty > 66)
         {
+            Debug.Log("Level gets cats, condors, and lions");
             numStandard = 10;
             numFlying = 10;
             numHeavy = Mathf.CeilToInt((levelDifficulty % 33) / 3.3f);

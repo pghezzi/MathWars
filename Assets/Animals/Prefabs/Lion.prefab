@@ -426,7 +426,6 @@ GameObject:
   - component: {fileID: 4886101968738366}
   - component: {fileID: 65306087575105876}
   - component: {fileID: 95995790678533120}
-  - component: {fileID: 114412009841591444}
   - component: {fileID: 3688215460002123930}
   m_Layer: 0
   m_Name: Lion
@@ -499,21 +498,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &114412009841591444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553991042791506}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40079260bda69f14c80332a04d1632a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 4
-  jumpForce: 300
-  timeBeforeNextJump: 1.2
 --- !u!114 &3688215460002123930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,8 +510,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33f543939cf1d43df819627e80d049ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
-  speed: 4
+  health: 14
+  speed: 6
   damage: 5
   isFlying: 0
 --- !u!1 &1559099344501894

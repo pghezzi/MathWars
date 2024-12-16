@@ -97,12 +97,11 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collision Detected");
-        Debug.Log("Collision with" + collision.gameObject.tag);
+
         string collisionType = collision.gameObject.tag;
         if (collisionType == "projectile")
         {
-            Debug.Log("Losing Health");
+
             TakeDamage(1);
         }
 

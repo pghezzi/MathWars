@@ -12,9 +12,13 @@ public class InfoPanelManager : MonoBehaviour
     public TMP_Text wavesText; 
     public TMP_Text coinsText;
     public TMP_Text heartsText;
+    public TMP_Text waveTimer;
     public GameObject TowerPlacer;
     public GameObject winScreen;
     public GameObject loseScreen;
+
+    private WaveManager waveManager;
+    private float time;
     
     int startingHearts;
     int startingCoins; 
@@ -43,7 +47,10 @@ public class InfoPanelManager : MonoBehaviour
             throw new Exception("InfoPanelManager: Could not find Level component in scene");
         }
         LevelData levelData = level.loadLevelData(level.level_name);
-        
+
+        waveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
+        time = waveManager.timeBetweenWaves;
+
         startingHearts = levelData.startingHearts;
         hearts = startingHearts;
         
@@ -66,7 +73,8 @@ public class InfoPanelManager : MonoBehaviour
         coinsText.text = coins.ToString();
         wavesText.text = $"WAVE {currWave}/{totalWaves}";
         checkIfLostLevel();
-        // checkIfWonLevel();
+        checkIfWonLevel();
+        WaveTimer();
     }
     
     public void loseHearts(int numHeartsLost)
@@ -133,15 +141,31 @@ public class InfoPanelManager : MonoBehaviour
         }
     }
     
-    // public void checkIfWonLevel()
-    // {
-    //     // we will get enemiesLeft from WaveManager
-    //     // if (!isGameWon && enemiesLeft <= 0 ) -- update when we total num enemies
-    //     if (!isGameWon && hearts > 0 )
-    //     {
-    //         Instantiate(winScreen);
-    //     }
-    // }
+    public void checkIfWonLevel()
+    {
+        int enemiesLeft = waveManager.totalEnemies;
+        if(enemiesLeft <= 0)
+        {
+            if (!isGameWon && hearts > 0)
+            {
+                Instantiate(winScreen);
+            }
+        }
+    }
+
+    public void WaveTimer()
+    {
+        Debug.Log("wave Timer");
+        waveTimer.enabled = false;
+        
+        if (waveManager.betweenWaves)
+        {
+            Debug.Log("Wave Complete");
+            waveTimer.enabled = true;
+            time -= Time.deltaTime;
+            waveTimer.text = $"Wave {currWave} Complete!\nNext Wave Starting in {Math.Ceiling(time)} Seconds";
+        }
+    }
     
     
     public void resetCoins()
