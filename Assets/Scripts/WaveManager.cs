@@ -90,7 +90,7 @@ public class WaveManager : MonoBehaviour
                     yield return null;
                 }
 
-                SpawnEnemy(enemy);
+                SpawnEnemy(enemy, (float) currentWave);
                 yield return new WaitForSeconds(timeBetweenSpawns);
             }
             
@@ -105,7 +105,7 @@ public class WaveManager : MonoBehaviour
         yield break; // Exit the coroutine after one wave
     }
 
-    void SpawnEnemy(string prefab)
+    void SpawnEnemy(string prefab, float wave)
     {
         if (standardEnemyPrefab == null)
         {
@@ -130,6 +130,9 @@ public class WaveManager : MonoBehaviour
         
         Enemy enemyScript = enemy.GetComponent<Enemy>();
 
+        //Increase health and speed by 1 every wave
+        enemyScript.speed += (wave - 1);
+        enemyScript.health += (wave - 1);
         Transform chosenEndPoint = endPoints[UnityEngine.Random.Range(0, endPoints.Count)];
 
         // Convert spawn and end points to grid coordinates
