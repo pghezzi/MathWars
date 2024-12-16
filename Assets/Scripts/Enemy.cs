@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public int damage = 10;
     public bool isFlying = false;
 
+
     private List<Vector3> path;
     private Vector3 direction;
     private int currentWaypoint = 0;
@@ -31,6 +32,9 @@ public class Enemy : MonoBehaviour
         wave = GameObject.Find("WaveManager").GetComponent<WaveManager>();
         float prob = Random.Range(0f, 1f);
 
+
+        Debug.Log($"Speed {speed}, Health {health} ");
+
         if(prob < .33)
         {
             speed -= 1;
@@ -51,6 +55,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        Debug.Log($"Speed: {speed}, Health: {health}");
         MoveAlongPath();
         ReachedEnd();
     }
@@ -149,6 +154,28 @@ public class Enemy : MonoBehaviour
     public void SetEndPoint(Transform point)
     {
         EndPoint = point;
+    }
+
+    public void IncreaseHealth(float amt)
+    {
+        health += amt;
+        Debug.Log($"Current Health = {health}");
+    }
+
+    public float GetHealth()
+    {
+        return health;
+    }
+
+    public void IncreaseSpeed(float amt)
+    {
+        speed += amt;
+        Debug.Log($"Current Speed = {speed}");
+    }
+
+    public float GetSpeed()
+    {
+        return speed;
     }
 }
 

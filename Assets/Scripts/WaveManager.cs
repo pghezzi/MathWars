@@ -90,7 +90,7 @@ public class WaveManager : MonoBehaviour
                     yield return null;
                 }
 
-                SpawnEnemy(enemy);
+                SpawnEnemy(enemy, (float) currentWave);
                 yield return new WaitForSeconds(timeBetweenSpawns);
             }
             
@@ -105,7 +105,7 @@ public class WaveManager : MonoBehaviour
         yield break; // Exit the coroutine after one wave
     }
 
-    void SpawnEnemy(string prefab)
+    void SpawnEnemy(string prefab, float wave)
     {
         if (standardEnemyPrefab == null)
         {
@@ -130,6 +130,10 @@ public class WaveManager : MonoBehaviour
         
         Enemy enemyScript = enemy.GetComponent<Enemy>();
 
+        //Increase health and speed by 1 every wave
+        enemyScript.speed += (wave - 1);
+        enemyScript.health += (wave - 1);
+
         // Convert spawn and end points to grid coordinates
         int blockSize = level.block_size;
         Vector2Int start = new Vector2Int(
@@ -144,6 +148,7 @@ public class WaveManager : MonoBehaviour
         // Calculate the path
         enemyScript.SetPath(CalculatePath(start, end));
         enemyScript.SetEndPoint(endPoint);
+        Debug.Log($"Spawning {prefab} with health {enemyScript.GetHealth()} and speed {enemyScript.GetSpeed()}");
     }
 
     List<Vector3> CalculatePath(Vector2Int start, Vector2Int end)
