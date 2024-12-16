@@ -29,9 +29,11 @@ public class InfoPanelManager : MonoBehaviour
 
      
     AudioManager audioManager;
+    WaveManager waveManager;
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        waveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
     }
 
     // Start is called before the first frame update
@@ -66,7 +68,7 @@ public class InfoPanelManager : MonoBehaviour
         coinsText.text = coins.ToString();
         wavesText.text = $"WAVE {currWave}/{totalWaves}";
         checkIfLostLevel();
-        // checkIfWonLevel();
+        checkIfWonLevel();
     }
     
     public void loseHearts(int numHeartsLost)
@@ -133,15 +135,15 @@ public class InfoPanelManager : MonoBehaviour
         }
     }
     
-    // public void checkIfWonLevel()
-    // {
-    //     // we will get enemiesLeft from WaveManager
-    //     // if (!isGameWon && enemiesLeft <= 0 ) -- update when we total num enemies
-    //     if (!isGameWon && hearts > 0 )
-    //     {
-    //         Instantiate(winScreen);
-    //     }
-    // }
+    public void checkIfWonLevel()
+    {
+        if (!isGameWon && hearts > 0 && waveManager.totalEnemies <= 0)
+        {
+            isGameWon = true;
+            audioManager.PlaySFX(audioManager.won);
+            Instantiate(winScreen);
+        }
+    }
     
     
     public void resetCoins()
