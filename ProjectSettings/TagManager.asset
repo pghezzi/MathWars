@@ -8,6 +8,7 @@ TagManager:
   - AirEnemy
   - GroundEnemy
   - Audio
+  - UI
   layers:
   - Default
   - TransparentFX

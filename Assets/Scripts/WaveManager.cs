@@ -22,6 +22,7 @@ public class WaveManager : MonoBehaviour
 
     private AStarPathfinding pathfinding;
     private int currentWave = 0;
+    private bool isSpawning;
 
     void Start()
     {
@@ -43,6 +44,9 @@ public class WaveManager : MonoBehaviour
             return;
         }
 
+        // The WaveManager will not begin spawning until we tell it to        
+        isSpawning = false;
+
         // Initialize A* Pathfinding
         pathfinding = new AStarPathfinding(level.grid);
 
@@ -55,10 +59,20 @@ public class WaveManager : MonoBehaviour
 
     IEnumerator SpawnWaves()
     {
+        // Pauses execution here until !pauseSpawning
+        while(!isSpawning)
+        {
+            yield return null;
+        } 
         currentWave++;
         Debug.Log("Wave " + currentWave + " starting!");
 
         foreach(string enemy in enemies) {
+            // Pauses execution here until !pauseSpawning
+            while(!isSpawning)
+            {
+                yield return null;
+            } 
 
             SpawnEnemy(enemy);
             yield return new WaitForSeconds(timeBetweenSpawns);
@@ -157,5 +171,15 @@ public class WaveManager : MonoBehaviour
 
         return enemies.OrderBy(_ => rng.Next()).ToList();
 
+    }
+    
+    public void pauseSpawning()
+    {
+        isSpawning = false;
+    }
+    
+    public void startSpawning()
+    {
+        isSpawning = true;
     }
 }
