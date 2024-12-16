@@ -826,6 +826,7 @@ MonoBehaviour:
   endPoint: {fileID: 1794644064}
   level: {fileID: 1744286105}
   levelDifficulty: 32
+  betweenWaves: 0
   enemiesPerWave: 5
   timeBetweenWaves: 15
   timeBetweenSpawns: 2
