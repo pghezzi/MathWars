@@ -46,7 +46,10 @@ public class MathPrompt : MonoBehaviour
         updateTimer();
         closeIfTimerHasExpired();
         playTickSound();
-        
+        if (Input.GetKey(KeyCode.Return))
+        {
+            checkAnswer();
+        }
     }
     
     void closeIfTimerHasExpired()
