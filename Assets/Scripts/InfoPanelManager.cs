@@ -158,9 +158,17 @@ public class InfoPanelManager : MonoBehaviour
         {
             Debug.Log("In between Waves");
             waveTimer.enabled = true;
-            time -= Time.deltaTime;
-            waveTimer.text = $"Wave {currWave} Complete!\nNext wave starting in {Math.Ceiling(time)}";
+            if (currWave < totalWaves)
+            {
+                time -= Time.deltaTime;
+                waveTimer.text = $"Wave {currWave} Complete!\nNext wave starting in {Math.Ceiling(time)}";
+            }
+            else
+            {
+                waveTimer.text = $"Wave {currWave} Complete!\nDefeat All Enemies";
+            }
         }
+        
         else
         {
             time = waveManager.timeBetweenWaves;
