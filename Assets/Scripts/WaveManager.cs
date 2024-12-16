@@ -13,6 +13,7 @@ public class WaveManager : MonoBehaviour
 
     public Level level;                    // Reference to the Level class
     public int levelDifficulty;
+    public bool betweenWaves;
 
     public int enemiesPerWave = 1;     
     public float timeBetweenWaves = 5f;   // Not used since only one wave
@@ -26,6 +27,7 @@ public class WaveManager : MonoBehaviour
     private int currentWave = 0;
     private InfoPanelManager InfoPanel;
     private bool isSpawning;
+    
 
     void Start()
     {

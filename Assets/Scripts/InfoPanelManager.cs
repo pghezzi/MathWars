@@ -17,7 +17,6 @@ public class InfoPanelManager : MonoBehaviour
     public GameObject winScreen;
     public GameObject loseScreen;
 
-    private WaveManager waveManager;
     private float time;
     
     int startingHearts;
@@ -50,7 +49,6 @@ public class InfoPanelManager : MonoBehaviour
         }
         LevelData levelData = level.loadLevelData(level.level_name);
 
-        waveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
         time = waveManager.timeBetweenWaves;
 
         startingHearts = levelData.startingHearts;
@@ -76,6 +74,7 @@ public class InfoPanelManager : MonoBehaviour
         wavesText.text = $"WAVE {currWave}/{totalWaves}";
         checkIfLostLevel();
         checkIfWonLevel();
+        WaveTimer();
     }
     
     public void loseHearts(int numHeartsLost)
@@ -152,6 +151,21 @@ public class InfoPanelManager : MonoBehaviour
         }
     }
     
+    public void WaveTimer()
+    {
+        
+        if (waveManager.betweenWaves)
+        {
+            Debug.Log("In between Waves");
+            waveTimer.enabled = true;
+            time -= Time.deltaTime;
+            waveTimer.text = $"Wave {currWave} Complete!\nNext wave starting in {Math.Ceiling(time)}";
+        }
+        else
+        {
+            waveTimer.enabled = false;
+        }
+    }
     
     public void resetCoins()
     {
