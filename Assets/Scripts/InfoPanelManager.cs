@@ -33,9 +33,11 @@ public class InfoPanelManager : MonoBehaviour
 
      
     AudioManager audioManager;
+    WaveManager waveManager;
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        waveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
     }
 
     // Start is called before the first frame update
@@ -74,7 +76,6 @@ public class InfoPanelManager : MonoBehaviour
         wavesText.text = $"WAVE {currWave}/{totalWaves}";
         checkIfLostLevel();
         checkIfWonLevel();
-        WaveTimer();
     }
     
     public void loseHearts(int numHeartsLost)
@@ -143,27 +144,11 @@ public class InfoPanelManager : MonoBehaviour
     
     public void checkIfWonLevel()
     {
-        int enemiesLeft = waveManager.totalEnemies;
-        if(enemiesLeft <= 0)
+        if (!isGameWon && hearts > 0 && waveManager.totalEnemies <= 0)
         {
-            if (!isGameWon && hearts > 0)
-            {
-                Instantiate(winScreen);
-            }
-        }
-    }
-
-    public void WaveTimer()
-    {
-        Debug.Log("wave Timer");
-        waveTimer.enabled = false;
-        
-        if (waveManager.betweenWaves)
-        {
-            Debug.Log("Wave Complete");
-            waveTimer.enabled = true;
-            time -= Time.deltaTime;
-            waveTimer.text = $"Wave {currWave} Complete!\nNext Wave Starting in {Math.Ceiling(time)} Seconds";
+            isGameWon = true;
+            audioManager.PlaySFX(audioManager.won);
+            Instantiate(winScreen);
         }
     }
     
