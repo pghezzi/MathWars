@@ -17,7 +17,7 @@ public class InfoPanelManager : MonoBehaviour
     int startingHearts;
     int startingCoins; 
     int totalWaves;
-    int currWave;
+    public int currWave;
     int hearts;
     int coins;
     int MAX_COINS = 999;

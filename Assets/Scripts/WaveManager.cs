@@ -17,11 +17,14 @@ public class WaveManager : MonoBehaviour
     public int enemiesPerWave = 1;     
     public float timeBetweenWaves = 5f;   // Not used since only one wave
     public float timeBetweenSpawns = 1f;
+    public int numWaves = 3;
+    public int totalEnemies ;
 
     private List<string> enemies; 
 
     private AStarPathfinding pathfinding;
     private int currentWave = 0;
+    private InfoPanelManager InfoPanel;
     private bool isSpawning;
 
     void Start()
@@ -44,6 +47,10 @@ public class WaveManager : MonoBehaviour
             return;
         }
 
+
+        InfoPanel = GameObject.Find("Info Panel").GetComponent<InfoPanelManager>();
+        
+
         // The WaveManager will not begin spawning until we tell it to        
         isSpawning = false;
 
@@ -52,6 +59,7 @@ public class WaveManager : MonoBehaviour
 
         // Initialize Enemies
         enemies = InitializeEnemies();
+        totalEnemies = numWaves * enemiesPerWave;
 
         // Start spawning waves
         StartCoroutine(SpawnWaves());
@@ -64,18 +72,27 @@ public class WaveManager : MonoBehaviour
         {
             yield return null;
         } 
-        currentWave++;
-        Debug.Log("Wave " + currentWave + " starting!");
+        
 
-        foreach(string enemy in enemies) {
-            // Pauses execution here until !pauseSpawning
-            while(!isSpawning)
+        for (int i = 0; i < numWaves; i++)
+        {
+            currentWave++;
+            Debug.Log("Wave " + currentWave + " starting!");
+            foreach (string enemy in enemies)
             {
-                yield return null;
-            } 
+                // Pauses execution here until !pauseSpawning
+                while (!isSpawning)
+                {
+                    yield return null;
+                }
 
-            SpawnEnemy(enemy);
-            yield return new WaitForSeconds(timeBetweenSpawns);
+                SpawnEnemy(enemy);
+                yield return new WaitForSeconds(timeBetweenSpawns);
+            }
+            
+            Debug.Log("Wave " + (i+1) + " complete");
+            yield return new WaitForSeconds(timeBetweenWaves);
+            InfoPanel.incrementWave();
         }
 
         Debug.Log("All waves completed.");
@@ -89,8 +106,6 @@ public class WaveManager : MonoBehaviour
             Debug.LogError("Standard enemy prefab is not assigned!");
             return;
         }
-
-        Debug.Log("Spawning " + prefab);
 
         GameObject enemy;
 
@@ -122,6 +137,7 @@ public class WaveManager : MonoBehaviour
 
         // Calculate the path
         enemyScript.SetPath(CalculatePath(start, end));
+        enemyScript.SetEndPoint(endPoint);
     }
 
     List<Vector3> CalculatePath(Vector2Int start, Vector2Int end)
@@ -153,6 +169,8 @@ public class WaveManager : MonoBehaviour
             numFlying = 10;
             numHeavy = Mathf.CeilToInt((levelDifficulty % 33) / 3.3f);
         }
+
+        enemiesPerWave = numStandard + numFlying + numHeavy;
 
         Debug.Log($"Wave Contains {numStandard} cats, {numFlying} vultures, {numHeavy} bears");
 

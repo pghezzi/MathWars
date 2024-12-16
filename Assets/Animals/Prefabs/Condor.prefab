@@ -615,5 +615,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   speed: 6
-  damage: 10
+  damage: 1
   isFlying: 1
