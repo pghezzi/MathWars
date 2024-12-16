@@ -13,6 +13,8 @@ public class InfoPanelManager : MonoBehaviour
     public TMP_Text coinsText;
     public TMP_Text heartsText;
     public GameObject TowerPlacer;
+    public GameObject winScreen;
+    public GameObject loseScreen;
     
     int startingHearts;
     int startingCoins; 
@@ -21,6 +23,8 @@ public class InfoPanelManager : MonoBehaviour
     int hearts;
     int coins;
     int MAX_COINS = 999;
+    public bool isGameWon = false;
+    public bool isGameLost = false;
     Level level;
 
      
@@ -61,6 +65,8 @@ public class InfoPanelManager : MonoBehaviour
         heartsText.text = hearts.ToString();
         coinsText.text = coins.ToString();
         wavesText.text = $"WAVE {currWave}/{totalWaves}";
+        checkIfLostLevel();
+        // checkIfWonLevel();
     }
     
     public void loseHearts(int numHeartsLost)
@@ -116,6 +122,27 @@ public class InfoPanelManager : MonoBehaviour
             currWave += 1;
         }
     }
+    
+    public void checkIfLostLevel()
+    {
+        if (!isGameLost && hearts <= 0)
+        {
+            isGameLost = true; 
+            audioManager.PlaySFX(audioManager.lost); 
+            Instantiate(loseScreen);
+        }
+    }
+    
+    // public void checkIfWonLevel()
+    // {
+    //     // we will get enemiesLeft from WaveManager
+    //     // if (!isGameWon && enemiesLeft <= 0 ) -- update when we total num enemies
+    //     if (!isGameWon && hearts > 0 )
+    //     {
+    //         Instantiate(winScreen);
+    //     }
+    // }
+    
     
     public void resetCoins()
     {
