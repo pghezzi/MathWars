@@ -1,10 +1,24 @@
 # MathWars
 
-Tower Defense game for unity
+Tower Defense game for Unity
 
 ## External Resources
 
+### Models
+
+### Fonts
+
+- [Jungle Adventurer - Tokokoo Studio](https://www.dafont.com/jungle-adventurer.font#null)
+
+### Textures
+
+- [25+ Free Stylized Textures - Grass, Ground, Floors, Walls & More - Game Buffs](https://assetstore.unity.com/packages/2d/textures-materials/25-free-stylized-textures-grass-ground-floors-walls-more-241895)
+
 ### UI
+
+- [Simple Button Set 01 - That Witch Design](https://assetstore.unity.com/packages/2d/gui/icons/simple-button-set-01-153979)
+- [2D Casual UI HD - MiMU STUDIO](https://assetstore.unity.com/packages/2d/gui/icons/2d-casual-ui-hd-82080)
+- [Splash Screen Background Image - Generated with ChatGPT](https://chatgpt.com/)
 
 ### Sound Effects
 
