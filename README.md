@@ -6,6 +6,7 @@ Tower Defense game for Unity
 
 ### Models
 - [Awesome Stylized Mage Tower](https://assetstore.unity.com/packages/3d/environments/fantasy/awesome-stylized-mage-tower-53793)
+- [Free Low Polygon_Animal](https://assetstore.unity.com/packages/3d/characters/animals/free-low-polygon-animal-110679)
 
 ### Fonts
 
