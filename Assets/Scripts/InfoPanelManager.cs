@@ -163,6 +163,7 @@ public class InfoPanelManager : MonoBehaviour
         }
         else
         {
+            time = waveManager.timeBetweenWaves;
             waveTimer.enabled = false;
         }
     }
