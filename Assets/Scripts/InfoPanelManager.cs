@@ -170,6 +170,7 @@ public class InfoPanelManager : MonoBehaviour
                 waveTimer.text = $"Wave {currWave} Complete!\nDefeat All Enemies";
             }
         }
+        
         else
         {
             waveTimerPopUp.SetActive(false);
