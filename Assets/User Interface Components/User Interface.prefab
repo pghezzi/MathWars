@@ -2733,6 +2733,8 @@ MonoBehaviour:
   coinsText: {fileID: 996944693128193555}
   heartsText: {fileID: 5728547277515286648}
   TowerPlacer: {fileID: 8772343489070123776, guid: 74c85e6fa06a75c4d86a349e9b979c8b, type: 3}
+  winScreen: {fileID: 3078053725064234261, guid: 48820192a596449f4bd97efcf10b2673, type: 3}
+  loseScreen: {fileID: 6476369151714063084, guid: a4ba7841c16e748089edf7c472e0da3b, type: 3}
 --- !u!1 &8116178365999358325
 GameObject:
   m_ObjectHideFlags: 0
