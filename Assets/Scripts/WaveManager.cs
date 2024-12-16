@@ -17,7 +17,7 @@ public class WaveManager : MonoBehaviour
     public int enemiesPerWave = 1;     
     public float timeBetweenWaves = 5f;   // Not used since only one wave
     public float timeBetweenSpawns = 1f;
-    public int numWaves = 3;
+    public int numWaves;
     public int totalEnemies ;
 
     private List<string> enemies; 
@@ -46,7 +46,8 @@ public class WaveManager : MonoBehaviour
             Debug.Log("Level Difficulty out of range");
             return;
         }
-
+        
+        numWaves = level.loadLevelData(level.level_name).numWaves;
 
         InfoPanel = GameObject.Find("Info Panel").GetComponent<InfoPanelManager>();
         

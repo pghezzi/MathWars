@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d414d9cd93ff146faabf5ef82f6a3924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerDuration: 1
+  timerDuration: 10
   questionText: {fileID: 3253720802267042235}
   answerInput: {fileID: 1578881003275845001}
   timerText: {fileID: 9075967121948544015}
