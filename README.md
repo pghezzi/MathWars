@@ -4,6 +4,8 @@ Tower Defense game for Unity
 
 ## Contributions
 
+- [Github Commit history](https://github.com/pghezzi/MathWars/commits/main)
+
 ## External Resources
 
 ### Models
