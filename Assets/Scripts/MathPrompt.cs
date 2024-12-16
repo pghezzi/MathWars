@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -38,6 +39,7 @@ public class MathPrompt : MonoBehaviour
     {
         time = timerDuration;
         generateRandomQuestion();
+        StartCoroutine(checkEnterKeyDown());
     }
 
     // Update is called once per frame
@@ -46,9 +48,18 @@ public class MathPrompt : MonoBehaviour
         updateTimer();
         closeIfTimerHasExpired();
         playTickSound();
-        if (Input.GetKey(KeyCode.Return))
+    }
+    
+    IEnumerator checkEnterKeyDown()
+    {
+        while (true) 
         {
-            checkAnswer();
+            if (Input.GetKey(KeyCode.Return))
+            {
+                checkAnswer();
+                yield return new WaitForSeconds(0.5f);
+            }
+            yield return null;
         }
     }
     
@@ -142,11 +153,16 @@ public class MathPrompt : MonoBehaviour
     
     public void checkAnswer()
     {
-        // Probably should do some input validation here
-        int userAnswer = int.Parse(answerInput.text);
+        int userAnswer;
+        int.TryParse(answerInput.text, out userAnswer);
         if (userAnswer == answer)
+        {
             handleCorrectAnswer();
+        }
         else
+        {
             handleWrongAnswer();
+        }
+        answerInput.ActivateInputField();
     }
 }
