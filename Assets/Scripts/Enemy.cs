@@ -138,10 +138,11 @@ public class Enemy : MonoBehaviour
         if (
             (transform.position.x <= EndPoint.position.x + 1f && transform.position.x >= EndPoint.position.x - 1f)
             &&
-            (transform.position.y <= EndPoint.position.y + 1f && transform.position.y >= EndPoint.position.y - 1f)
-            )
+            (transform.position.z <= EndPoint.position.z + 1f && transform.position.z >= EndPoint.position.z - 1f)
+        )
         {
             InfoPanel.loseHearts(damage);
+            health = 0;
             Die();
         }
     }
