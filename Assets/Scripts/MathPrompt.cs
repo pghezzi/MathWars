@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class MathPrompt : MonoBehaviour
 {
@@ -23,9 +24,13 @@ public class MathPrompt : MonoBehaviour
     float tickTimer;         // Tracks time for the tick sound
 
     AudioManager audioManager;
+    public InfoPanelManager infoPanelManager;
+    public WaveManager waveManager;
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        infoPanelManager = GameObject.Find("Info Panel").GetComponent<InfoPanelManager>();
+        waveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
     }
 
     // Start is called before the first frame update
@@ -49,6 +54,10 @@ public class MathPrompt : MonoBehaviour
         if (time <= 0)
         {
             gameObject.SetActive(false);
+            if (waveManager)
+            {
+                waveManager.startSpawning();
+            }
         }
     }
     
@@ -103,16 +112,16 @@ public class MathPrompt : MonoBehaviour
     
     void handleCorrectAnswer()
     {
-        time = timerDuration;
         answerInput.text = "";
+        infoPanelManager.gainCoins(5);
         audioManager.PlaySFX(audioManager.correctAnswer);
         generateRandomQuestion();
     }
     
     void handleWrongAnswer()
     {
+        answerInput.text = "";
         audioManager.PlaySFX(audioManager.wrongAnswer);
-        gameObject.SetActive(false);
     }
     
     void playTickSound()

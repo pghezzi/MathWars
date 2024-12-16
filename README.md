@@ -2,9 +2,12 @@
 
 Tower Defense game for Unity
 
+## Contributions
+
 ## External Resources
 
 ### Models
+
 - [Awesome Stylized Mage Tower](https://assetstore.unity.com/packages/3d/environments/fantasy/awesome-stylized-mage-tower-53793)
 - [Free Low Polygon_Animal](https://assetstore.unity.com/packages/3d/characters/animals/free-low-polygon-animal-110679)
 - [5 animated Voxel animals](https://assetstore.unity.com/packages/3d/characters/animals/5-animated-voxel-animals-145754)
@@ -15,7 +18,7 @@ Tower Defense game for Unity
 
 ### Textures
 
-- [25+ Free Stylized Textures - Grass, Ground, Floors, Walls & More - Game Buffs](https://assetstore.unity.com/packages/2d/textures-materials/25-free-stylized-textures-grass-ground-floors-walls-more-241895)
+- [25+ Free Stylized Textures - Grass, Ground, Floors, Walls &amp; More - Game Buffs](https://assetstore.unity.com/packages/2d/textures-materials/25-free-stylized-textures-grass-ground-floors-walls-more-241895)
 
 ### UI
 

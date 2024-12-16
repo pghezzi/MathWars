@@ -2,7 +2,7 @@
   "level": 1,
   "name": "Level 1",
   "startingHearts": 20,
-  "startingCoins": 200,
+  "startingCoins": 10,
   "numWaves": 3,
   "grid": [
     [0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
