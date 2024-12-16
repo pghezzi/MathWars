@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 5203647529087237142}
   m_Layer: 0
   m_Name: Cat
-  m_TagString: Untagged
+  m_TagString: GroundEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33f543939cf1d43df819627e80d049ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 3
   speed: 5
   damage: 10
   isFlying: 0
