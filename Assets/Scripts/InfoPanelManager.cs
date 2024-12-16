@@ -13,6 +13,7 @@ public class InfoPanelManager : MonoBehaviour
     public TMP_Text coinsText;
     public TMP_Text heartsText;
     public TMP_Text waveTimer;
+    public GameObject waveTimerPopUp;
     public GameObject TowerPlacer;
     public GameObject winScreen;
     public GameObject loseScreen;
@@ -157,14 +158,24 @@ public class InfoPanelManager : MonoBehaviour
         if (waveManager.betweenWaves)
         {
             Debug.Log("In between Waves");
+            waveTimerPopUp.SetActive(true);
             waveTimer.enabled = true;
-            time -= Time.deltaTime;
-            waveTimer.text = $"Wave {currWave} Complete!\nNext wave starting in {Math.Ceiling(time)}";
+            if (currWave < totalWaves)
+            {
+                time -= Time.deltaTime;
+                waveTimer.text = $"Wave {currWave} Complete!\nNext wave starting in {Math.Ceiling(time)}";
+            }
+            else
+            {
+                waveTimer.text = $"Wave {currWave} Complete!\nDefeat All Enemies";
+            }
         }
+        
         else
         {
-            time = waveManager.timeBetweenWaves;
+            waveTimerPopUp.SetActive(false);
             waveTimer.enabled = false;
+            time = waveManager.timeBetweenWaves;
         }
     }
     
