@@ -15,8 +15,9 @@ public class Tower : MonoBehaviour
     [SerializeField] GameObject projectile;
     [SerializeField] float damage;
     [SerializeField] float velocity;
-    
-         
+    [SerializeField] float range;
+
+
     AudioManager audioManager;
     private void Awake()
     {
@@ -44,7 +45,7 @@ public class Tower : MonoBehaviour
             {
                 audioManager.PlaySFX(audioManager.towerShooting);
                 currProjectile = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y + 18, transform.position.z), transform.rotation);
-                currProjectile.transform.localScale = new Vector3(blocksize, blocksize, blocksize);
+                currProjectile.transform.localScale = new Vector3(blocksize/3f, blocksize/3f, blocksize/3f);
                 Projectile p = currProjectile.GetComponent<Projectile>();
                 p.SetupProjectile(closest, damage, blocksize * velocity);
             }
@@ -60,7 +61,7 @@ public class Tower : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             float distance = enemy.GetComponent<Enemy>().GetRemainingDistance();
-            if (distance < min)
+            if (distance < min & (enemy.transform.position - transform.position).magnitude < range * blocksize)
             {
                 min = distance;
                 closest = enemy;
