@@ -574,4 +574,4 @@ MonoBehaviour:
   projectile: {fileID: 4661981500207589019, guid: 016da2df184f0344792ce54bb5373131, type: 3}
   damage: 1
   velocity: 5
-  range: 6
+  range: 3
