@@ -9,7 +9,7 @@ public class WaveManager : MonoBehaviour
     public GameObject flyingEnemyPrefab;   // vulture Enemy prefab
     public GameObject heavyEnemyPrefab;    // bear Enemy prefab
     public Transform spawnPoint;           // Starting point
-    public Transform endPoint;             // Target point
+    public List<Transform> endPoints;             // Target point
 
     public Level level;                    // Reference to the Level class
     public int levelDifficulty;
@@ -130,6 +130,8 @@ public class WaveManager : MonoBehaviour
         
         Enemy enemyScript = enemy.GetComponent<Enemy>();
 
+        Transform chosenEndPoint = endPoints[UnityEngine.Random.Range(0, endPoints.Count)];
+
         // Convert spawn and end points to grid coordinates
         int blockSize = level.block_size;
         Vector2Int start = new Vector2Int(
@@ -137,13 +139,13 @@ public class WaveManager : MonoBehaviour
             Mathf.RoundToInt(spawnPoint.position.z / blockSize)
         );
         Vector2Int end = new Vector2Int(
-            Mathf.RoundToInt(endPoint.position.x / blockSize),
-            Mathf.RoundToInt(endPoint.position.z / blockSize)
+            Mathf.RoundToInt(chosenEndPoint.position.x / blockSize),
+            Mathf.RoundToInt(chosenEndPoint.position.z / blockSize)
         );
 
         // Calculate the path
         enemyScript.SetPath(CalculatePath(start, end));
-        enemyScript.SetEndPoint(endPoint);
+        enemyScript.SetEndPoint(chosenEndPoint);
     }
 
     List<Vector3> CalculatePath(Vector2Int start, Vector2Int end)

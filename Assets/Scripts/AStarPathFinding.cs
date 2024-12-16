@@ -57,7 +57,7 @@ public class AStarPathfinding
 
                 if (IsInBounds(neighbor) && (grid[neighbor.x, neighbor.y] == Tiles.Path))
                 {
-                    float movementCost = 1 + UnityEngine.Random.Range(0f, 0.5f);
+                    float movementCost = UnityEngine.Random.Range(1f, 100f);
                     float tentativeGScore = gScore[current] + movementCost;
                     if (tentativeGScore < gScore[neighbor])
                     {
@@ -84,7 +84,7 @@ public class AStarPathfinding
 
     private float Heuristic(Vector2Int a, Vector2Int b)
     {
-        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y); // Manhattan distance
+        return (Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y)) * 0.1f; // Reduced weight
     }
 
 
