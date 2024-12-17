@@ -79,7 +79,7 @@ public class Projectile : MonoBehaviour
     public void ParabolaMove() {
         float xPosition = (1-curTime) * startPos.x + curTime * target.transform.position.x;
         float zPosition =  (1-curTime) * startPos.z + curTime * target.transform.position.z;
-        float acceleration = 0.25f * (velocity * velocity) / (startPos.y - target.transform.position.y);
+        float acceleration = 0.25f * (velocity * Mathf.Sin(60) * velocity * Mathf.Sin(60)) / (startPos.y - target.transform.position.y);
         float yPosition = -1 * acceleration * curTime * curTime + velocity * curTime + startPos.y;
         transform.position = new Vector3(xPosition,yPosition,zPosition);
     }
