@@ -9,9 +9,9 @@ public class Projectile : MonoBehaviour
     private GameObject target;
     private float damage;
     private float velocity;
-    private Boolean areaOfEffect = false;
+    private bool areaOfEffect = false;
 
-    private float curTime;
+    private float curTime = 0.0f;
 
     private Vector3 startPos;
 
@@ -19,7 +19,6 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         startPos = transform.position;
-        curTime = 0;
         
     }
 
@@ -49,7 +48,7 @@ public class Projectile : MonoBehaviour
                 {
                     Collider[] enemiesToHit = Physics.OverlapSphere(target.transform.position, AoeTower.surroundingDistance);
                     enemiesToHit = enemiesToHit.Where(item => item.gameObject.tag.Contains("Enemy")).ToArray();
-                    Array.ForEach(enemiesToHit, curEnemy => curEnemy.GetComponent<Enemy>().TakeDamage(damage));
+                    Array.ForEach(enemiesToHit, curEnemy => curEnemy.gameObject.GetComponent<Enemy>().TakeDamage(damage));
                     GameObject explosion = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     explosion.transform.localScale = new Vector3(0, 0, 0);
                     explosion.AddComponent<Explosion>();
@@ -68,7 +67,7 @@ public class Projectile : MonoBehaviour
         curTime += Time.deltaTime;
     }
 
-    public void SetupProjectile(GameObject target, float damage, float velocity, Boolean area = false)
+    public void SetupProjectile(GameObject target, float damage, float velocity, bool area = false)
     {
         this.damage = damage;
         this.velocity = velocity;
