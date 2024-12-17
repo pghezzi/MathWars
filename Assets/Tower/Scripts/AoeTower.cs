@@ -11,10 +11,9 @@ public class AoeTower : MonoBehaviour
     private GameObject best;
     private GameObject currProjectile;
     private float blocksize;
+    public static float surroundingDistance;
 
-    public AudioSource explosionSound;
-
-    public float surroundingDistance;
+    public AudioSource launch;
 
     [SerializeField] string targetsTag;
     [SerializeField] GameObject projectile;
@@ -34,7 +33,7 @@ public class AoeTower : MonoBehaviour
     {
         best = Best(targetsTag);
     }
-
+ 
     IEnumerator Shoot()
     {
         while (true) {
@@ -43,7 +42,8 @@ public class AoeTower : MonoBehaviour
                 currProjectile = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y + 18, transform.position.z), transform.rotation);
                 currProjectile.transform.localScale = new Vector3(blocksize, blocksize, blocksize);
                 Projectile p = currProjectile.GetComponent<Projectile>();
-                p.SetupProjectile(best, damage, blocksize * velocity);
+                launch.Play();
+                p.SetupProjectile(best, damage, blocksize * velocity, this);
             }
             yield return new WaitForSeconds((float)1.8);
         } 
