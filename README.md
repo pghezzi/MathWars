@@ -2,6 +2,11 @@
 
 Tower Defense game for Unity
 
+## How To Run
+
+- Please make sure that all scenes will be built in the build settings
+- Start the game from the StartScreen scene
+
 ## Contributions
 
 - [Github Commit history](https://github.com/pghezzi/MathWars/commits/main)
