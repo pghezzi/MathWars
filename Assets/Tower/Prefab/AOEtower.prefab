@@ -67,5 +67,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100008, guid: d052d933598dac241a51c227cfe7a313, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 173292811154424979}
   m_SourcePrefab: {fileID: 100100000, guid: d052d933598dac241a51c227cfe7a313, type: 3}
+--- !u!1 &8386996477985017556 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100008, guid: d052d933598dac241a51c227cfe7a313, type: 3}
+  m_PrefabInstance: {fileID: 8386996477984917628}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &173292811154424979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8386996477985017556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235041da7d8f2264e9a6be49221352ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  launch: {fileID: 0}
+  targetsTag: GroundEnemy
+  projectile: {fileID: 4661981500207589019, guid: c2a242154505abc458bb4fe2e8fd07c9, type: 3}
+  damage: 10
+  velocity: 5

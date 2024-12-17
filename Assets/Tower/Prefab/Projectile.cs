@@ -28,16 +28,21 @@ public class Projectile : MonoBehaviour
         if (!areaOfEffect) {
 
             if (target != null) {
-            transform.Translate(
-                velocity * Time.deltaTime * (target.transform.position - transform.position).normalized
-            );
+                transform.Translate(
+                    velocity * Time.deltaTime * (target.transform.position - transform.position).normalized
+                );
+                if ((target.transform.position - transform.position).magnitude < 0.1)
+                {
+                    target.GetComponent<Enemy>().TakeDamage(damage);
+                    Destroy(gameObject);
+                }
             }
-
-            if((target.transform.position - transform.position).magnitude < 0.1)
+            else
             {
-                target.GetComponent<Enemy>().TakeDamage(damage);
                 Destroy(gameObject);
             }
+
+            
         }
 
         else {
