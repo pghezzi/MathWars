@@ -58,7 +58,8 @@ public class AoeTower : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
            Collider[] nearbyEnemies = Physics.OverlapSphere(enemy.transform.position,surroundingDistance);
-           nearbyEnemies = nearbyEnemies.Where(c => c.gameObject.tag == tag).ToArray();
+           nearbyEnemies = nearbyEnemies.Where(c => c.gameObject.tag.Contains("Enemy")).ToArray();
+           Debug.Log(nearbyEnemies.Length);
             if (nearbyEnemies.Length > max)
             {
                 max = nearbyEnemies.Length;
