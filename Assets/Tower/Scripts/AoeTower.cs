@@ -45,21 +45,20 @@ public class AoeTower : MonoBehaviour
                 launch.Play();
                 p.SetupProjectile(best, damage, blocksize * velocity, true);
                 currProjectile = null;
+                yield return new WaitForSeconds(1.8f);
             }
-            yield return new WaitForSeconds(1.8f);
         } 
     }
 
     GameObject Best(string tag)
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(tag);
-        float max = -1;
+        int max = -1;
         GameObject best = null;
         foreach (GameObject enemy in enemies)
         {
            Collider[] nearbyEnemies = Physics.OverlapSphere(enemy.transform.position,surroundingDistance);
            nearbyEnemies = nearbyEnemies.Where(c => c.gameObject.tag.Contains("Enemy")).ToArray();
-           Debug.Log(nearbyEnemies.Length);
             if (nearbyEnemies.Length > max)
             {
                 max = nearbyEnemies.Length;

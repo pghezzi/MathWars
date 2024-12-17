@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour
     private Vector3 startPos;
 
 
-    private void Start()
+    void Start()
     {
         startPos = transform.position;
         
@@ -43,16 +43,19 @@ public class Projectile : MonoBehaviour
 
             else
             {
-                parabolaMove();
+                ParabolaMove();
                 if ((target.transform.position - transform.position).magnitude < 0.1)
                 {
                     Collider[] enemiesToHit = Physics.OverlapSphere(transform.position, AoeTower.surroundingDistance);
-                    enemiesToHit = enemiesToHit.Where(item => item.tag == target.tag).ToArray();
+                    enemiesToHit = enemiesToHit.Where(item => item.gameObject.tag.Contains("Enemy")).ToArray();
                     Array.ForEach(enemiesToHit, curEnemy => curEnemy.GetComponent<Enemy>().TakeDamage(damage));
                     GameObject explosion = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     explosion.transform.localScale = new Vector3(0, 0, 0);
                     explosion.AddComponent<Explosion>();
                     explosion.AddComponent<AudioSource>();
+                    Destroy(gameObject);
+                }
+                else if (curTime > 1.25) {
                     Destroy(gameObject);
                 }
             }
@@ -72,11 +75,11 @@ public class Projectile : MonoBehaviour
         this.areaOfEffect = area;
     }
 
-    public void parabolaMove() {
+    public void ParabolaMove() {
         float xPosition = (1-curTime) * startPos.x + curTime * target.transform.position.x;
         float zPosition =  (1-curTime) * startPos.z + curTime * target.transform.position.z;
-        float acceleration = 0.25f * (velocity * Mathf.Sin(30.0f)) * (velocity * Mathf.Sin(30.0f)) / (startPos.y - target.transform.position.y);
-        float yPosition = -1 * acceleration * curTime * curTime + velocity * Mathf.Sin(30.0f) * curTime + startPos.y;
+        float acceleration = 0.25f * (velocity * velocity) / (startPos.y - target.transform.position.y);
+        float yPosition = -1 * acceleration * curTime * curTime + velocity * curTime + startPos.y;
         transform.position = new Vector3(xPosition,yPosition,zPosition);
     }
 }
