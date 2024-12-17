@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
     private GameObject target;
     private float damage;
     private float velocity;
-    private Boolean areaOfEffect;
+    private Boolean areaOfEffect = false;
 
     private float curTime;
 
@@ -56,12 +56,12 @@ public class Projectile : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
-            curTime += Time.deltaTime;
         }
         else
         {
             Destroy(gameObject);
         }
+        curTime += Time.deltaTime;
     }
 
     public void SetupProjectile(GameObject target, float damage, float velocity, Boolean area = false)
@@ -76,7 +76,7 @@ public class Projectile : MonoBehaviour
         float xPosition = (1-curTime) * startPos.x + curTime * target.transform.position.x;
         float zPosition =  (1-curTime) * startPos.z + curTime * target.transform.position.z;
         float acceleration = 0.25f * (velocity * Mathf.Sin(30.0f)) * (velocity * Mathf.Sin(30.0f)) / (startPos.y - target.transform.position.y);
-        float yPosition = -1 * acceleration * curTime * curTime + velocity * Mathf.Sin(30.0f) * curTime + startPos.y;
+        float yPosition = 1 * acceleration * curTime * curTime + velocity * Mathf.Sin(30.0f) * curTime + startPos.y;
         transform.position = new Vector3(xPosition,yPosition,zPosition);
     }
 }
