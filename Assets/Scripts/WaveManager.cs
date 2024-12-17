@@ -13,15 +13,21 @@ public class WaveManager : MonoBehaviour
 
     public Level level;                    // Reference to the Level class
     public int levelDifficulty;
+    public bool betweenWaves;
 
     public int enemiesPerWave = 1;     
     public float timeBetweenWaves = 5f;   // Not used since only one wave
     public float timeBetweenSpawns = 1f;
+    public int numWaves;
+    public int totalEnemies ;
 
     private List<string> enemies; 
 
     private AStarPathfinding pathfinding;
     private int currentWave = 0;
+    private InfoPanelManager InfoPanel;
+    private bool isSpawning;
+    
 
     void Start()
     {
@@ -42,12 +48,21 @@ public class WaveManager : MonoBehaviour
             Debug.Log("Level Difficulty out of range");
             return;
         }
+        
+        numWaves = level.loadLevelData(level.level_name).numWaves;
+
+        InfoPanel = GameObject.Find("Info Panel").GetComponent<InfoPanelManager>();
+        betweenWaves = false;
+
+        // The WaveManager will not begin spawning until we tell it to        
+        isSpawning = false;
 
         // Initialize A* Pathfinding
         pathfinding = new AStarPathfinding(level.grid);
 
         // Initialize Enemies
         enemies = InitializeEnemies();
+        totalEnemies = numWaves * enemiesPerWave;
 
         // Start spawning waves
         StartCoroutine(SpawnWaves());
@@ -55,28 +70,48 @@ public class WaveManager : MonoBehaviour
 
     IEnumerator SpawnWaves()
     {
-        currentWave++;
-        Debug.Log("Wave " + currentWave + " starting!");
+        // Pauses execution here until !pauseSpawning
+        while(!isSpawning)
+        {
+            yield return null;
+        } 
+        
 
-        foreach(string enemy in enemies) {
+        for (int i = 0; i < numWaves; i++)
+        {
+            currentWave++;
+            betweenWaves = false;
+            Debug.Log("Wave " + currentWave + " starting!");
+            foreach (string enemy in enemies)
+            {
+                // Pauses execution here until !pauseSpawning
+                while (!isSpawning)
+                {
+                    yield return null;
+                }
 
-            SpawnEnemy(enemy);
-            yield return new WaitForSeconds(timeBetweenSpawns);
+                SpawnEnemy(enemy, (float) currentWave);
+                yield return new WaitForSeconds(timeBetweenSpawns);
+            }
+            
+            Debug.Log("Wave " + (i+1) + " complete");
+            betweenWaves = true;
+            yield return new WaitForSeconds(timeBetweenWaves);
+            InfoPanel.incrementWave();
+            
         }
-
+        betweenWaves = false;
         Debug.Log("All waves completed.");
         yield break; // Exit the coroutine after one wave
     }
 
-    void SpawnEnemy(string prefab)
+    void SpawnEnemy(string prefab, float wave)
     {
         if (standardEnemyPrefab == null)
         {
             Debug.LogError("Standard enemy prefab is not assigned!");
             return;
         }
-
-        Debug.Log("Spawning " + prefab);
 
         GameObject enemy;
 
@@ -95,6 +130,10 @@ public class WaveManager : MonoBehaviour
         
         Enemy enemyScript = enemy.GetComponent<Enemy>();
 
+        //Increase health and speed by 1 every wave
+        enemyScript.speed += (wave - 1);
+        enemyScript.health += (wave - 1);
+
         // Convert spawn and end points to grid coordinates
         int blockSize = level.block_size;
         Vector2Int start = new Vector2Int(
@@ -108,6 +147,7 @@ public class WaveManager : MonoBehaviour
 
         // Calculate the path
         enemyScript.SetPath(CalculatePath(start, end));
+        enemyScript.SetEndPoint(endPoint);
     }
 
     List<Vector3> CalculatePath(Vector2Int start, Vector2Int end)
@@ -120,25 +160,30 @@ public class WaveManager : MonoBehaviour
     List<string> InitializeEnemies() //Initialize list of enemies to spawn based on level difficulty
     {
         List<string> enemies = new List<string>();
-
+        Debug.Log("Level Difficulty: " + levelDifficulty);
         int numStandard = 0;
         int numFlying = 0;
         int numHeavy = 0;
-        if (levelDifficulty < 33)
+        if (levelDifficulty <= 33)
         {
+            Debug.Log("Level gets just cats");
             numStandard = Mathf.CeilToInt(levelDifficulty / 3.3f);
         }
-        if(levelDifficulty >= 66)
+        if(levelDifficulty > 33)
         {
+            Debug.Log("Level gets cats and condors");
             numStandard = 10;
             numFlying = Mathf.CeilToInt((levelDifficulty % 33) / 3.3f);
         }
         if(levelDifficulty > 66)
         {
+            Debug.Log("Level gets cats, condors, and lions");
             numStandard = 10;
             numFlying = 10;
             numHeavy = Mathf.CeilToInt((levelDifficulty % 33) / 3.3f);
         }
+
+        enemiesPerWave = numStandard + numFlying + numHeavy;
 
         Debug.Log($"Wave Contains {numStandard} cats, {numFlying} vultures, {numHeavy} bears");
 
@@ -157,5 +202,15 @@ public class WaveManager : MonoBehaviour
 
         return enemies.OrderBy(_ => rng.Next()).ToList();
 
+    }
+    
+    public void pauseSpawning()
+    {
+        isSpawning = false;
+    }
+    
+    public void startSpawning()
+    {
+        isSpawning = true;
     }
 }

@@ -322,7 +322,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 700, y: 0}
+  m_AnchoredPosition: {x: 700, y: 17}
   m_SizeDelta: {x: 1300, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2137369604810703302
@@ -354,10 +354,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "At the start of each level you will be asked a few math problems. Solve
-    as many problems as you can to get more coins.\n\nPlace towers to attack enemies
-    and stop from getting to the end of the level or you will lose hearts. You can
-    use coins to purchase towers. \n\nSurvive all waves of enemies without losing
-    all your hearts to beat the level.\n\nGood luck!\n\n"
+    as many problems as you can to get more coins.\n\nRight Click on grey tiles to
+    purchase and place towers using coins. \n\nPlace towers strategically to attack
+    enemies and stop them from getting to the end of the level or you will lose hearts.
+    \n\nSurvive all waves of enemies without losing all your hearts to beat the level.\n\nGood
+    luck!\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d6cd566b0c4f3431b8cf99dc680b6ad7, type: 2}
   m_sharedMaterial: {fileID: 2260664482952401327, guid: d6cd566b0c4f3431b8cf99dc680b6ad7, type: 2}
@@ -558,6 +559,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 506585998663002089}
+        m_TargetAssemblyTypeName: UIButtons, Assembly-CSharp
+        m_MethodName: playClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8890618736907419356
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,13 +582,14 @@ GameObject:
   - component: {fileID: 4784610681026749691}
   - component: {fileID: 730319258768451705}
   - component: {fileID: 7476897062184100412}
+  - component: {fileID: 506585998663002089}
   m_Layer: 5
   m_Name: How To Play Pop Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4784610681026749691
 RectTransform:
   m_ObjectHideFlags: 0
@@ -634,3 +648,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &506585998663002089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8890618736907419356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ac1925190544fdfab22e4821373d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

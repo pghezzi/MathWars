@@ -12,15 +12,33 @@ public class InfoPanelManager : MonoBehaviour
     public TMP_Text wavesText; 
     public TMP_Text coinsText;
     public TMP_Text heartsText;
+    public TMP_Text waveTimer;
+    public GameObject waveTimerPopUp;
+    public GameObject TowerPlacer;
+    public GameObject winScreen;
+    public GameObject loseScreen;
+
+    private float time;
     
     int startingHearts;
     int startingCoins; 
     int totalWaves;
-    int currWave;
+    public int currWave;
     int hearts;
     int coins;
     int MAX_COINS = 999;
+    public bool isGameWon = false;
+    public bool isGameLost = false;
     Level level;
+
+     
+    AudioManager audioManager;
+    WaveManager waveManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        waveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +49,9 @@ public class InfoPanelManager : MonoBehaviour
             throw new Exception("InfoPanelManager: Could not find Level component in scene");
         }
         LevelData levelData = level.loadLevelData(level.level_name);
-        
+
+        time = waveManager.timeBetweenWaves;
+
         startingHearts = levelData.startingHearts;
         hearts = startingHearts;
         
@@ -44,6 +64,7 @@ public class InfoPanelManager : MonoBehaviour
         heartsText.text = startingHearts.ToString(); 
         coinsText.text = startingCoins.ToString();
         wavesText.text = $"WAVE {currWave}/{totalWaves}";
+        Instantiate(TowerPlacer);
     }
 
     // Update is called once per frame
@@ -52,12 +73,16 @@ public class InfoPanelManager : MonoBehaviour
         heartsText.text = hearts.ToString();
         coinsText.text = coins.ToString();
         wavesText.text = $"WAVE {currWave}/{totalWaves}";
+        checkIfLostLevel();
+        checkIfWonLevel();
+        WaveTimer();
     }
     
     public void loseHearts(int numHeartsLost)
     {
         if (hearts > 0)
         {
+            audioManager.PlaySFX(audioManager.loseHeart);
             hearts = Mathf.Clamp(hearts - numHeartsLost, 0, startingHearts);
         }
     }
@@ -74,6 +99,7 @@ public class InfoPanelManager : MonoBehaviour
     {
         if (coins > 0)
         {
+            audioManager.PlaySFX(audioManager.spentMoney);
             coins = Mathf.Clamp(coins - numCoinsLost, 0, MAX_COINS); 
         }
     }
@@ -82,6 +108,7 @@ public class InfoPanelManager : MonoBehaviour
     {
         if (coins < MAX_COINS)
         {
+            audioManager.PlaySFX(audioManager.earnedMoney);
             coins = Mathf.Clamp(coins + numCoinGained, 0, MAX_COINS);
         }
     }
@@ -100,7 +127,55 @@ public class InfoPanelManager : MonoBehaviour
     {
         if (currWave < totalWaves)
         {
+            audioManager.PlaySFX(audioManager.newWave);
             currWave += 1;
+        }
+    }
+    
+    public void checkIfLostLevel()
+    {
+        if (!isGameLost && hearts <= 0)
+        {
+            isGameLost = true; 
+            audioManager.PlaySFX(audioManager.lost); 
+            Instantiate(loseScreen);
+        }
+    }
+    
+    public void checkIfWonLevel()
+    {
+        if (!isGameWon && hearts > 0 && waveManager.totalEnemies <= 0)
+        {
+            isGameWon = true;
+            audioManager.PlaySFX(audioManager.won);
+            Instantiate(winScreen);
+        }
+    }
+    
+    public void WaveTimer()
+    {
+        
+        if (waveManager.betweenWaves)
+        {
+            Debug.Log("In between Waves");
+            waveTimerPopUp.SetActive(true);
+            waveTimer.enabled = true;
+            if (currWave < totalWaves)
+            {
+                time -= Time.deltaTime;
+                waveTimer.text = $"Wave {currWave} Complete!\nNext wave starting in {Math.Ceiling(time)}";
+            }
+            else
+            {
+                waveTimer.text = $"Wave {currWave} Complete!\nDefeat All Enemies";
+            }
+        }
+        
+        else
+        {
+            waveTimerPopUp.SetActive(false);
+            waveTimer.enabled = false;
+            time = waveManager.timeBetweenWaves;
         }
     }
     

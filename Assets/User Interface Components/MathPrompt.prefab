@@ -49,6 +49,8 @@ MonoBehaviour:
   questionText: {fileID: 3253720802267042235}
   answerInput: {fileID: 1578881003275845001}
   timerText: {fileID: 9075967121948544015}
+  infoPanelManager: {fileID: 0}
+  waveManager: {fileID: 0}
 --- !u!1 &2697642245442153920
 GameObject:
   m_ObjectHideFlags: 0

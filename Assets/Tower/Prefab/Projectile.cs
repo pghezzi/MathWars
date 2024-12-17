@@ -39,7 +39,6 @@ public class Projectile : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-
         else {
             parabolaMove();
             if ((target.transform.position - transform.position).magnitude < 0.1) {

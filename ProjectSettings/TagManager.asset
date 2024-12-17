@@ -7,6 +7,9 @@ TagManager:
   - Level
   - AirEnemy
   - GroundEnemy
+  - Audio
+  - UI
+  - endPoint
   layers:
   - Default
   - TransparentFX

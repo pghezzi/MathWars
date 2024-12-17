@@ -53,6 +53,7 @@ public class Level: MonoBehaviour
     private AStarPathfinding pathfinding;
     public Transform endPoint;
     public GameObject placeUI;
+    public GameObject mathPrompt;
 
     // Texture Material References -- maybe this should be moved to levelX.json files?
     public Material unplaceableMaterial;
@@ -99,6 +100,7 @@ public class Level: MonoBehaviour
                 (bounds_size_z) / 2 + bounds_min_z
         );
         Instantiate(placeUI);
+        Instantiate(mathPrompt);
         drawgrid();
         pathfinding = new AStarPathfinding(grid);
     }

@@ -1,5 +1,7 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class MathPrompt : MonoBehaviour
 {
@@ -18,12 +20,26 @@ public class MathPrompt : MonoBehaviour
     public TMP_Text questionText;
     public TMP_InputField answerInput;
     public TMP_Text timerText;
-    
+
+    float tickInterval = 1f; // Interval for the ticking sound
+    float tickTimer;         // Tracks time for the tick sound
+
+    AudioManager audioManager;
+    public InfoPanelManager infoPanelManager;
+    public WaveManager waveManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        infoPanelManager = GameObject.Find("Info Panel").GetComponent<InfoPanelManager>();
+        waveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         time = timerDuration;
         generateRandomQuestion();
+        StartCoroutine(checkEnterKeyDown());
     }
 
     // Update is called once per frame
@@ -31,7 +47,20 @@ public class MathPrompt : MonoBehaviour
     {
         updateTimer();
         closeIfTimerHasExpired();
-        
+        playTickSound();
+    }
+    
+    IEnumerator checkEnterKeyDown()
+    {
+        while (true) 
+        {
+            if (Input.GetKey(KeyCode.Return))
+            {
+                checkAnswer();
+                yield return new WaitForSeconds(0.5f);
+            }
+            yield return null;
+        }
     }
     
     void closeIfTimerHasExpired()
@@ -39,6 +68,10 @@ public class MathPrompt : MonoBehaviour
         if (time <= 0)
         {
             gameObject.SetActive(false);
+            if (waveManager)
+            {
+                waveManager.startSpawning();
+            }
         }
     }
     
@@ -93,23 +126,43 @@ public class MathPrompt : MonoBehaviour
     
     void handleCorrectAnswer()
     {
-        time = timerDuration;
         answerInput.text = "";
+        infoPanelManager.gainCoins(5);
+        audioManager.PlaySFX(audioManager.correctAnswer);
         generateRandomQuestion();
     }
     
     void handleWrongAnswer()
     {
-        gameObject.SetActive(false);
+        answerInput.text = "";
+        audioManager.PlaySFX(audioManager.wrongAnswer);
+    }
+    
+    void playTickSound()
+    {
+        if (time > 0)
+        {
+            tickTimer -= Time.deltaTime;
+            if (tickTimer <= 0f)
+            {
+                audioManager.PlaySFX(audioManager.timerTick);
+                tickTimer = tickInterval;
+            }
+        }
     }
     
     public void checkAnswer()
     {
-        // Probably should do some input validation here
-        int userAnswer = int.Parse(answerInput.text);
+        int userAnswer;
+        int.TryParse(answerInput.text, out userAnswer);
         if (userAnswer == answer)
+        {
             handleCorrectAnswer();
+        }
         else
+        {
             handleWrongAnswer();
+        }
+        answerInput.ActivateInputField();
     }
 }

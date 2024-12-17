@@ -91,5 +91,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetsTag: AirEnemy
   projectile: {fileID: 4661981500207589019, guid: e45e9e61e9b40c04ca09ecb31cc8a3cc, type: 3}
-  damage: 10
+  damage: 1
   velocity: 5
+  range: 3
