@@ -8,6 +8,12 @@ Tower Defense game for Unity
 
 ## External Resources
 
+### Code
+
+We followed this tutorial closely to learn how to handle audio and sound effects
+
+- [How to Add MUSIC and SOUND EFFECTS to a Game in Unity | Unity 2D Platformer Tutorial #16 - Rehope Games](https://www.youtube.com/watch?v=N8whM1GjH4w)
+
 ### Models
 
 - [Awesome Stylized Mage Tower](https://assetstore.unity.com/packages/3d/environments/fantasy/awesome-stylized-mage-tower-53793)
