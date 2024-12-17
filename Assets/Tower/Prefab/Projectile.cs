@@ -76,7 +76,7 @@ public class Projectile : MonoBehaviour
         float xPosition = (1-curTime) * startPos.x + curTime * target.transform.position.x;
         float zPosition =  (1-curTime) * startPos.z + curTime * target.transform.position.z;
         float acceleration = 0.25f * (velocity * Mathf.Sin(30.0f)) * (velocity * Mathf.Sin(30.0f)) / (startPos.y - target.transform.position.y);
-        float yPosition = 1 * acceleration * curTime * curTime + velocity * Mathf.Sin(30.0f) * curTime + startPos.y;
+        float yPosition = -1 * acceleration * curTime * curTime + velocity * Mathf.Sin(30.0f) * curTime + startPos.y;
         transform.position = new Vector3(xPosition,yPosition,zPosition);
     }
 }
