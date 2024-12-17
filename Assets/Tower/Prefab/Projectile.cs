@@ -25,9 +25,12 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!areaOfEffect) {
+        if (target != null)
+        {
+            if (!areaOfEffect)
+            {
 
-            if (target != null) {
+
                 transform.Translate(
                     velocity * Time.deltaTime * (target.transform.position - transform.position).normalized
                 );
@@ -37,28 +40,28 @@ public class Projectile : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
+
             else
             {
-                Destroy(gameObject);
+                parabolaMove();
+                if ((target.transform.position - transform.position).magnitude < 0.1)
+                {
+                    Collider[] enemiesToHit = Physics.OverlapSphere(transform.position, AoeTower.surroundingDistance);
+                    enemiesToHit = enemiesToHit.Where(item => item.tag == target.tag).ToArray();
+                    Array.ForEach(enemiesToHit, curEnemy => curEnemy.GetComponent<Enemy>().TakeDamage(damage));
+                    GameObject explosion = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    explosion.transform.localScale = new Vector3(0, 0, 0);
+                    explosion.AddComponent<Explosion>();
+                    explosion.AddComponent<AudioSource>();
+                    Destroy(gameObject);
+                }
             }
-
-            
+            curTime += Time.deltaTime;
         }
-
-        else {
-            parabolaMove();
-            if ((target.transform.position - transform.position).magnitude < 0.1) {
-                Collider[] enemiesToHit = Physics.OverlapSphere(transform.position,AoeTower.surroundingDistance);
-                enemiesToHit = enemiesToHit.Where(item => item.tag == target.tag).ToArray();
-                Array.ForEach(enemiesToHit,curEnemy => curEnemy.GetComponent<Enemy>().TakeDamage(damage));
-                GameObject explosion = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                explosion.transform.localScale = new Vector3(0,0,0);
-                explosion.AddComponent<Explosion>();
-                explosion.AddComponent<AudioSource>();
-                Destroy(gameObject);
-            }
+        else
+        {
+            Destroy(gameObject);
         }
-        curTime += Time.deltaTime;
     }
 
     public void SetupProjectile(GameObject target, float damage, float velocity, Boolean area = false)
