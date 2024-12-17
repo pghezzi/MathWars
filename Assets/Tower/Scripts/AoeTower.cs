@@ -44,6 +44,7 @@ public class AoeTower : MonoBehaviour
                 Projectile p = currProjectile.GetComponent<Projectile>();
                 launch.Play();
                 p.SetupProjectile(best, damage, blocksize * velocity, true);
+                currProjectile = null;
             }
             yield return new WaitForSeconds(1.8f);
         } 
