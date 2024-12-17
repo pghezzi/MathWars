@@ -43,9 +43,9 @@ public class AoeTower : MonoBehaviour
                 currProjectile.transform.localScale = new Vector3(blocksize, blocksize, blocksize);
                 Projectile p = currProjectile.GetComponent<Projectile>();
                 launch.Play();
-                p.SetupProjectile(best, damage, blocksize * velocity, this);
+                p.SetupProjectile(best, damage, blocksize * velocity, true);
             }
-            yield return new WaitForSeconds((float)1.8);
+            yield return new WaitForSeconds(1.8f);
         } 
     }
 
