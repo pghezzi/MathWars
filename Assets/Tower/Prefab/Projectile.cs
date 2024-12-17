@@ -47,7 +47,7 @@ public class Projectile : MonoBehaviour
                 ParabolaMove();
                 if ((target.transform.position - transform.position).magnitude < 0.1)
                 {
-                    Collider[] enemiesToHit = Physics.OverlapSphere(transform.position, AoeTower.surroundingDistance);
+                    Collider[] enemiesToHit = Physics.OverlapSphere(target.transform.position, AoeTower.surroundingDistance);
                     enemiesToHit = enemiesToHit.Where(item => item.gameObject.tag.Contains("Enemy")).ToArray();
                     Array.ForEach(enemiesToHit, curEnemy => curEnemy.GetComponent<Enemy>().TakeDamage(damage));
                     GameObject explosion = GameObject.CreatePrimitive(PrimitiveType.Cube);
