@@ -19,6 +19,7 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         startPos = transform.position;
+        curTime = 0;
         
     }
 
